@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: NWeb-scrapper
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: admin
+    username: jrr
+    url: jdbc:postgresql://localhost:5432/nwebscrapper
+
+server:
+  port: 8080
