@@ -91,7 +91,7 @@ public class NWebscrapperService {
             for (int i=0; i<cssSelectors.size(); i++) {
                 Element selector = document.selectFirst(cssSelectors.get(i));
                 if (selector == null) {
-                    log.warn("SELECTOR :: {} :: NOT FOUND", selector);
+                    log.warn("SELECTOR :: {} :: NOT FOUND", cssSelectors.get(i));
                     continue;
                 }
                 ExtractionMethod extractionMethod = (i < extractions.size()) ? extractions.get(i) : ExtractionMethod.ALL;

@@ -2,6 +2,7 @@ package com.example.vpn.controller;
 
 import com.example.vpn.models.ExtractionMethod;
 import com.example.vpn.models.Website;
+import com.example.vpn.service.NWebscrapperConsumer;
 import com.example.vpn.service.NWebscrapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Set;
 public class NWebscrapperController {
 
     private final NWebscrapperService webscrapperService;
+    private final NWebscrapperConsumer webscrapperConsumer;
 
     @GetMapping("/scrape")
     public ResponseEntity<Void> scrapeUrl(
@@ -24,7 +26,7 @@ public class NWebscrapperController {
             @RequestParam List<ExtractionMethod> extractions,
             @RequestParam boolean isOutput
     ) {
-        webscrapperService.scrape(url, cssSelectors, extractions, isOutput);
+        webscrapperConsumer.consumeWebscrapperKafkaUrl(url, cssSelectors, extractions, isOutput);
         return ResponseEntity.ok().build();
     }
 
