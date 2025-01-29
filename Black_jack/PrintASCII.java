@@ -3,7 +3,7 @@ import java.util.List;
 public class PrintASCII {
 
     public static void printTwoCards() {
-        List<String> deck = Startup.loadDeck();
+        List<String> deck = Table.loadDeck();
         int cardWidth = 17;
         int cardHeight = 7;
 
@@ -105,7 +105,6 @@ public class PrintASCII {
                                                                𝐌𝐚𝐢𝐧 𝐌𝐞𝐧𝐮
                         Play Game (P)
                         Account (A)
-                        Settings (S)
                         Exit (X)
                         [Type 'h' for help/how to play]
                         ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────◄╣

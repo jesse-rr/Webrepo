@@ -1,11 +1,18 @@
+import java.io.*;
 import java.util.*;
 
 public class Startup {
     public static void main(String[] args) {
-        firstMenu();
+        firstMenu(
+                new Player(
+                        "jrr",
+                        300.43,
+                        23.3
+                )
+        );
     }
 
-    private static void firstMenu() {
+    private static void firstMenu(Player player) {
         do {
             PrintASCII.printMainMenu(3);
             Scanner userInput = new Scanner(System.in);
@@ -19,7 +26,7 @@ public class Startup {
                     logIn();
                     break;
                 case "g":
-                    mainMenu();
+                    mainMenu(player);
                     break;
                 case "x":
                     System.exit(0);
@@ -28,15 +35,21 @@ public class Startup {
         } while (true);
     }
 
-    private static void logIn() {
-        
+    private static void logIn(String username, String password) throws FileNotFoundException {
+        FileReader reader = new FileReader("./data/user_data.txt");
+
+        if (reader
+        )
     }
 
-    private static void signIn() {
-
+    private static void signIn(String username, String password) throws IOException {
+        File userData = new File("./data/user_data.txt");
+        FileWriter writer = new FileWriter(userData);
+        String userInfo = " player: [name: "+username+", password: "+password+", balance: R$ 2000.0 winRate: 0%]";
+        writer.write(userInfo+"\n");
     }
 
-    private static void mainMenu() {
+    private static void mainMenu(Player player) {
         boolean exit = true;
         do {
             PrintASCII.printMainMenu(1);
@@ -47,11 +60,8 @@ public class Startup {
                 case "p":
                     playGame();
                     break;
-                case "v":
-                    account();
-                    break;
-                case "s":
-                    settings();
+                case "a":
+                    account(player);
                     break;
                 case "x":
                     exit = false;
@@ -81,32 +91,31 @@ public class Startup {
         } while (exit);
     }
 
-    private static void settings() {
-    }
-
-    private static void account() {
+    private static void account(Player player) {
+        boolean exit = true;
+        do {
+            System.out.printf("""
+                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────◄╣
+                                                                 𝐀𝐜𝐜𝐨𝐮𝐧𝐭
+                        ■ Name: %s
+                        ■ Balance: %s
+                        ■ Win Rate: %s
+                                                         𝗣𝗥𝗘𝗦𝗦 (𝗫) 𝗧𝗢 𝗥𝗘𝗧𝗨𝗥𝗡
+                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────◄╣
+                        """,player.getName(),"R$ "+player.getBalance(),player.getWinRate()+"%");
+            Scanner userInput = new Scanner(System.in);
+            String menuChoice = userInput.next().trim().toLowerCase();
+            switch (menuChoice) {
+                case "x":
+                    exit = false;
+                    break;
+                default:
+                    System.out.println("Not a valid option! Try again");
+            }
+        } while (exit);
     }
 
     private static void playGame() {
     }
 
-
-    private boolean isAbove21(int totalHandValue) {
-        return totalHandValue <= 21;
-    }
-
-    public static List<String> loadDeck() {
-        List<String> suits = List.of("♥", "♦", "♣", "♠");
-        List<String> cardNumbers = List.of("2", "3", "4", "5", "6", "7", "8", "9", "10", "A", "J", "Q", "K");
-        List<String> deck = new ArrayList<>();
-
-        for (String num : cardNumbers) {
-            for (String suit : suits) {
-                deck.add(num + suit);
-            }
-        }
-
-        Collections.shuffle(deck);
-        return deck;
-    }
 }
