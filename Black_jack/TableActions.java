@@ -39,4 +39,8 @@ public class TableActions {
     public boolean isBlackjack(List<String> cards) {
         return cards.contains("A") && cards.contains("♥") || cards.contains("♦") || cards.contains("♣") || cards.contains("♠");
     }
+
+    public boolean canInsurance(String card) {
+        return card.contains("A");
+    }
 }
