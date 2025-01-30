@@ -4,14 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Startup {
-
     public static void main(String[] args) throws IOException, InterruptedException {
         firstMenu();
     }
 
     private static void firstMenu() throws IOException, InterruptedException {
         do {
-            PrintASCII.printMainMenu(3);
+            PrintASCII.printlnMenu(3);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
 
@@ -132,7 +131,7 @@ public class Startup {
     private static void mainMenu(Player player) throws IOException, InterruptedException {
         boolean exit = true;
         do {
-            PrintASCII.printMainMenu(1);
+            PrintASCII.printlnMenu(1);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
 
@@ -157,7 +156,7 @@ public class Startup {
 
     private static void helpMenu() {
         do {
-            PrintASCII.printMainMenu(2);
+            PrintASCII.printlnMenu(2);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
             switch (menuChoice) {
@@ -172,18 +171,7 @@ public class Startup {
 
     private static void account(Player player) {
         do {
-            System.out.printf("""
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────◄╣
-                                                                   Account
-                         ■ Name: %s
-                         ■ Balance: %s
-                         ■ Win Rate: %s
-                         ■ Wins: %s
-                         ■ Loses: %s
-                                                            Press (X) to Return
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────◄╣
-                        """, player.getName(), "R$ " + player.getBalance(), player.getWinRate() + "%", player.getWins(), player.getLoses());
-
+            PrintASCII.printFMenu(player, 1);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
             switch (menuChoice) {
@@ -199,196 +187,18 @@ public class Startup {
     private static void startGame(Player player) throws IOException, InterruptedException {
         double bet = 0;
         do {
-            System.out.printf("""
-                    ╟►────────────────────────────◄═══════════[[█████]]══════════►─────────────────────────────◄╣
-
-                             ██╗███╗   ██╗██╗████████╗██╗ █████╗ ██╗         ██████╗ ███████╗████████╗
-                             ██║████╗  ██║██║╚══██╔══╝██║██╔══██╗██║         ██╔══██╗██╔════╝╚══██╔══╝
-                             ██║██╔██╗ ██║██║   ██║   ██║███████║██║         ██████╔╝█████╗     ██║
-                             ██║██║╚██╗██║██║   ██║   ██║██╔══██║██║         ██╔══██╗██╔══╝     ██║
-                             ██║██║ ╚████║██║   ██║   ██║██║  ██║███████╗    ██████╔╝███████╗   ██║
-                             ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚══════╝   ╚═╝
-
-                     Your balance: R$ %s
-                    ╟►────────────────────────────◄═══════════[[█████]]══════════►─────────────────────────────◄╣
-                    """, player.getBalance());
+            PrintASCII.printFMenu(player, 2);
             Scanner userInput = new Scanner(System.in);
             System.out.print("Total amount: ");
-            bet = userInput.nextDouble();
+            String input = userInput.nextLine().trim().replace(',','.');
+            bet = Double.parseDouble(input);
             if (bet > player.getBalance()) {
                 System.out.println("Not a valid option! Try again, the amount must be within balance of player");
             } else {
                 break;
             }
         } while (true);
-        tableGame(player, bet);
-    }
-
-    private static void tableGame(Player player, double bet) throws IOException, InterruptedException {
-        TableActions table = new TableActions();
-        List<String> deck = table.createDeck(); go
-        int index = 0;
-        boolean noWinner = true;
-        double insurance = 0.0;
-        do {
-            System.out.print("""
-                    ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
-                                                           🃏  Dealer  🃏
-
-                    """);
-            List<String> dealerCards = new ArrayList<>(PrintASCII.printTwoCards(deck, index, true));
-            index+=2;
-            System.out.println();
-
-            List<String> playerCards = PrintASCII.printTwoCards(deck, index, false);
-            index+=2;
-            System.out.print("""
-
-                                                            ♛  Player  ♛
-                    ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
-                    """);
-
-            Scanner userInput = new Scanner(System.in);
-            System.out.println("""
-                    (1) - Hit
-                    (2) - Stand
-                    (3) - Double Down
-                    (4) - Split
-                    (5) - Surrender
-                    (6) - Insurance
-                    """);
-            String decision = userInput.next().trim().toLowerCase();
-            switch (decision) {
-                case "1":
-                    break;
-                case "2":
-                    int winner = standLogic(deck, index, table, dealerCards, playerCards);
-                    switch (winner) {
-                        case 1:
-                            if (table.isBlackjack(playerCards)) {
-                                player.setBalance(player.getBalance() + bet * 1.5 - insurance);
-                                System.out.println("BLACKJACK WIN: +" + bet * 1.5 + "\n" + "+1 WIN");
-                            } else {
-                                player.setBalance(player.getBalance() + bet - insurance);
-                                System.out.println("WIN: +" + bet + "\n" + "+1 WIN");
-                            }
-                            player.setWins(player.getWins() + 1);
-                            if (table.isBlackjack(dealerCards)) {
-                                if (insurance > 0) {
-                                    System.out.println("You win the insurance bet: +" + (insurance * 2));
-                                    player.setBalance(player.getBalance() + insurance * 2); // Insurance win
-                                }
-                            } else {
-                                if (insurance > 0) {
-                                    System.out.println("You lose the insurance bet.");
-                                    player.setBalance(player.getBalance() - insurance); // Loss of insurance bet
-                                }
-                            }
-                            break;
-                        case 2:
-                            if (table.isBlackjack(dealerCards)) {
-                                if (insurance > 0) {
-                                    System.out.println("You win the insurance bet: +" + (insurance * 2));
-                                    player.setBalance(player.getBalance() + insurance * 2); // Insurance win
-                                }
-                            }
-                            player.setBalance(player.getBalance() - bet - insurance);
-                            player.setLoses(player.getLoses() + 1);
-                            System.out.println("LOSE: -" + bet + "\n" + "+1 LOSE");
-
-                            if (!table.isBlackjack(dealerCards) && insurance > 0) {
-                                System.out.println("You lose the insurance bet.");
-                                player.setBalance(player.getBalance() - insurance); // Loss of insurance bet
-                            }
-                            break;
-                        case -1:
-                            if (insurance > 0) {
-                                System.out.println("You lose the insurance bet.");
-                                player.setBalance(player.getBalance() - insurance); // Loss of insurance bet
-                            }
-                            break;
-                    }
-                    player.setWinRate(Math.round(100.0 * player.getWins() / (player.getWins() + player.getLoses())));
-                    savePlayerInfo(player);
-                    noWinner = false;
-                    break;
-                case "3":
-                    break;
-                case "4":
-                    break;
-                case "5":
-                    System.out.print("Are you sure of Surrender? I'll not count as a loss, but half your bet will be lost. Y/N: ");
-                    String confirm = userInput.next().trim().toLowerCase().substring(0,1);
-                    switch (confirm) {
-                        case "y":
-                            player.setBalance(player.getBalance()-bet/2);
-                            savePlayerInfo(player);
-                            noWinner = false;
-                            break;
-                    }
-                    index=0;
-                    break;
-                case "6":
-                    if (table.canInsurance(dealerCards.get(0))) {
-                        System.out.print("Would you like insurance? If the dealer has blackjack (A + 10), you win 2:1 on the insurance bet. Y/N: ");
-                        confirm = userInput.next().trim().toLowerCase();
-                        if (confirm.equals("y")) {
-                            do {
-                                System.out.print("Insurance cannot be above half your original bet. Enter insurance amount: ");
-                                insurance = userInput.nextDouble();
-                            } while (insurance > bet / 2);
-                        }
-                        index = 0;
-                        break;
-                    } else {
-                        System.out.println("The dealer must have an Ace as the face-up card to take insurance!");
-                        index = 0;
-                        break;
-                    }
-            }
-        } while (noWinner);
-    }
-
-    private static int standLogic(List<String> deck, int index, TableActions table, List<String> dealerCards, List<String> playerCards) throws InterruptedException {
-        PrintASCII.printTwoCards(deck, index - 4, false);
-        PrintASCII.printTwoCards(deck, index - 2, false);
-        int dealerTotal = table.sumCards(dealerCards);
-        Thread.sleep(1000);
-        System.out.print("Dealer's total: " + dealerTotal +"\r");
-
-        while (dealerTotal < 17) {
-            Thread.sleep(3000);
-            System.out.print("Dealer hits!"+"\r");
-            dealerCards.add(deck.get(index++));
-            dealerTotal = table.sumCards(dealerCards);
-            Thread.sleep(2000);
-            System.out.print("Dealer's total after hit: " + dealerTotal +"\r");
-        }
-        if (dealerTotal > 21) {
-            Thread.sleep(1000);
-            System.out.println("Dealer has gone over 21! Player wins.");
-            return 1;
-        }
-
-        Thread.sleep(1000);
-        System.out.print("Dealer stands with " + dealerTotal +"\r");
-        int playerTotal = table.sumCards(playerCards);
-        Thread.sleep(1000);
-        System.out.print("Player's total: " + playerTotal +"\r");
-
-        if (dealerTotal > playerTotal) {
-            Thread.sleep(2000);
-            System.out.println("Dealer wins!");
-            return 2;
-        } else if (dealerTotal < playerTotal) {
-            Thread.sleep(2000);
-            System.out.println("Player wins!");
-            return 1;
-        } else {
-            Thread.sleep(2000);
-            System.out.println("It's a tie!");
-            return -1;
-        }
+        GameActions.table(player, bet);
     }
 
     public static void savePlayerInfo(Player player) throws IOException {

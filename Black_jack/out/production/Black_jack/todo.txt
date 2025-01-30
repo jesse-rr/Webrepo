@@ -1,2 +1,0 @@
-check the printf -> not working
-check the draw mechanic -> returns null and breaks the project.

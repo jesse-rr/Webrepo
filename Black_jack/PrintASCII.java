@@ -2,124 +2,104 @@ import java.util.List;
 
 public class PrintASCII {
 
-//    public static List<String> printAllCardLine(List<String> user_deck, boolean isDealerCards) {
-//        for (int i = 0; i < user_deck.size(); i++) {
-//            String card1 =
-//        }
-//    }
-
-    public static List<String> printTwoCards(List<String> deck, int index, boolean isDealerCards) {
+    public static List<String> printCards(List<String> deck, int numCards, boolean isDealerCards, int showCardNumber) {
         int cardWidth = 19;
         int cardHeight = 13;
 
-        String card1 = deck.get(index);
-        String card2 = deck.get(index+1);
-
-        printTopBorder(cardWidth, isDealerCards);
-
+        printTopBorder(cardWidth, numCards, isDealerCards);
+        System.out.println();
         for (int i = 0; i < cardHeight - 2; i++) {
-            printCardLine(card1, card2, i, isDealerCards);
+            printCardLine(deck.subList(0, numCards), i, numCards, isDealerCards, showCardNumber);
         }
-        printBottomBorder(cardWidth, isDealerCards);
+        printBottomBorder(cardWidth, numCards, isDealerCards);
+        System.out.println();
 
-        return List.of(card1,card2);
+        return deck;
     }
 
-    private static void printCardLine(String card1, String card2, int row, boolean isDealerCards) {
-        String rank1 = card1.substring(0, card1.length() - 1);
-        String suit1 = card1.substring(card1.length() - 1);
-        String rank2 = card2.substring(0, card2.length() - 1);
-        String suit2 = card2.substring(card2.length() - 1);
+    private static void printCardLine(List<String> cards, int row, int numCards, boolean isDealerCards, int showCardNumber) {
+        for (int i = 0; i < numCards; i++) {
+            String card = cards.get(i);
+            String rank = card.substring(0, card.length() - 1);
+            String suit = card.substring(card.length() - 1);
 
-        System.out.print("│");
-
-
-        if (row == 0) {
-            if (rank1.equals("10")) {
-                System.out.printf(" %-3s             │", rank1);
-            } else {
-                System.out.printf(" %-2s              │", rank1);
-            }
-        } else if (row == 5) {
-            System.out.printf("        %-2s       │", suit1);
-        } else if (row == 10) {
-            if (rank1.equals("10")) {
-                System.out.printf("              %-3s│", rank1);
-            } else {
-                System.out.printf("               %-2s│", rank1);
-            }
-        } else {
-            System.out.print("                 │");
-        }
-
-        System.out.print("  ");
-
-        System.out.print("│");
-        if (isDealerCards) {
-            System.out.print("█████████████████│");
-        } else {
-            if (row == 0) {
-                if (rank2.equals("10")) {
-                    System.out.printf(" %-3s             │", rank2);
+            if (isDealerCards && i == 1) {
+                if (row == 5 && i == numCards - 1) {
+                    System.out.printf("│█████████████████│ Total value: [ %s ]", showCardNumber);
                 } else {
-                    System.out.printf(" %-2s              │", rank2);
-                }
-            } else if (row == 5) {
-                System.out.printf("        %-2s       │", suit2);
-            } else if (row == 10) {
-                if (rank2.equals("10")) {
-                    System.out.printf("              %-3s│", rank2);
-                } else {
-                    System.out.printf("               %-2s│", rank2);
+                    System.out.print("│█████████████████│ ");
                 }
             } else {
-                System.out.print("                 │");
+                System.out.print("│");
+
+                if (row == 0) {
+                    if (rank.equals("10")) {
+                        System.out.printf(" %-3s             │", rank);
+                    } else {
+                        System.out.printf(" %-2s              │", rank);
+                    }
+                } else if (row == 5) {
+                    if (i == numCards - 1) {
+                        System.out.printf("        %-2s       │ Total value: [ %s ]", suit, showCardNumber);
+                    } else {
+                        System.out.printf("        %-2s       │", suit);
+                    }
+                } else if (row == 10) {
+                    if (rank.equals("10")) {
+                        System.out.printf("              %-3s│", rank);
+                    } else {
+                        System.out.printf("               %-2s│", rank);
+                    }
+                } else {
+                    System.out.print("                 │");
+                }
+                System.out.print(" ");
             }
         }
         System.out.println();
     }
 
-    private static void printTopBorder(int cardWidth, boolean isDealerCards) {
-        System.out.print("┌");
-        for (int i = 1; i < cardWidth - 1; i++) {
-            System.out.print("─");
-        }
-        System.out.print("┐");
-        System.out.print("  ");
-        System.out.print("┌");
-        for (int i = 1; i < cardWidth - 1; i++) {
-            if (isDealerCards) {
-                System.out.print("▄");
+    private static void printTopBorder(int cardWidth, int numCards, boolean isDealerCards) {
+        for (int j = 0; j < numCards; j++) {
+            System.out.print("┌");
+            if (j == 1 && isDealerCards) {
+                for (int i = 1; i < cardWidth - 1; i++) {
+                    System.out.print("▄");
+                }
+                System.out.print("┐");
             } else {
-                System.out.print("─");
+                for (int i = 1; i < cardWidth - 1; i++) {
+                    System.out.print("─");
+                }
+                System.out.print("┐");
             }
+            System.out.print(" ");
         }
-        System.out.println("┐");
     }
 
-    private static void printBottomBorder(int cardWidth, boolean isDealerCards) {
-        System.out.print("└");
-        for (int i = 1; i < cardWidth - 1; i++) {
-            System.out.print("─");
-        }
-        System.out.print("┘");
-        System.out.print("  ");
-        System.out.print("└");
-        for (int i = 1; i < cardWidth - 1; i++) {
-            if (isDealerCards) {
-                System.out.print("▀");
+    private static void printBottomBorder(int cardWidth, int numCards, boolean isDealerCards) {
+        for (int j = 0; j < numCards; j++) {
+            System.out.print("└");
+            if (j == 1 && isDealerCards) {
+                for (int i = 1; i < cardWidth - 1; i++) {
+                    System.out.print("▀");
+                }
+                System.out.print("┘");
             } else {
-                System.out.print("─");
+                for (int i = 1; i < cardWidth - 1; i++) {
+                    System.out.print("─");
+                }
+                System.out.print("┘");
             }
+            System.out.print(" ");
         }
-        System.out.println("┘");
     }
 
-    public static void printMainMenu(int menuNumber) {
+    public static void printlnMenu(int menuNumber) {
         switch (menuNumber) {
             case 1:
                 System.out.println("""
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
 
                                     ███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
                                     ████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
@@ -128,13 +108,13 @@ public class PrintASCII {
                                     ██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
                                     ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
 
-                          Start Game (S)
-                          Account (A)
-                          Exit (X)
-                          [Type 'h' for help/how to play]
+                      Start Game (S)
+                      Account (A)
+                      Exit (X)
+                      [Type 'h' for help/how to play]
 
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
-                        """);
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                    """);
                 break;
             case 2:
                 System.out.println("""
@@ -177,18 +157,62 @@ public class PrintASCII {
                 break;
             case 3:
                 System.out.println("""
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
                                                             ♣  ♠  Blackjack  ♥  ♦
 
                                                                [S] - Sign in
                                                                 [L] - Login
-                                                            [G] - Play as Guest
+                                                             [G] - Play as Guest
                                                                  (X) - EXIT
 
-                        ╟►────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────◄╣
-                        """);
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                    """);
+                break;
+            case 4:
+                System.out.println("""
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                                                                🃏  Dealer  🃏
+                    """);
+                break;
+            case 5:
+                System.out.println("""
+                                                                ♛  Player  ♛
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                    """);
                 break;
         }
+    }
+    
+    public static void printFMenu(Player player, int menuNumber) {
+        switch (menuNumber) {
+            case 1:
+                System.out.printf("""
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                                                                   Account
+                         ■ Name: %s
+                         ■ Balance: %s
+                         ■ Win Rate: %s
+                         ■ Wins: %s
+                         ■ Loses: %s
+                                                            Press (X) to Return
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                    """, player.getName(), "R$ " + player.getBalance(), player.getWinRate() + "%", player.getWins(), player.getLoses());
+                break;
+            case 2:
+                System.out.printf("""
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
 
+                                 ██╗███╗   ██╗██╗████████╗██╗ █████╗ ██╗         ██████╗ ███████╗████████╗
+                                 ██║████╗  ██║██║╚══██╔══╝██║██╔══██╗██║         ██╔══██╗██╔════╝╚══██╔══╝
+                                 ██║██╔██╗ ██║██║   ██║   ██║███████║██║         ██████╔╝█████╗     ██║
+                                 ██║██║╚██╗██║██║   ██║   ██║██╔══██║██║         ██╔══██╗██╔══╝     ██║
+                                 ██║██║ ╚████║██║   ██║   ██║██║  ██║███████╗    ██████╔╝███████╗   ██║
+                                 ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚══════╝   ╚═╝
+
+                     Your balance: R$ %s
+                    ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
+                    """, player.getBalance());
+                break;
+        }
     }
 }

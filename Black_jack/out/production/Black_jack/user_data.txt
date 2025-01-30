@@ -1,4 +1,1 @@
-player: [name: jrr, password: cGFzc3dk, balance: R$ 2200.0, winRate: 100.0%, wins: 1, loses: 0]
-player: [name: test, password: dGVzdHBz, balance: R$ 2000.0, winRate: 0%, wins: 0, loses: 0]
-player: [name: newuser, password: bmV3dXNlcg==, balance: R$ 2400.0, winRate: 100.0%, wins: 1, loses: 0]
-player: [name: newUserAgain, password: cGFzc3dk, balance: R$ 2100.0, winRate: 100.0%, wins: 1, loses: 0]
+player: [name: jrr, password: cGFzc3dk, balance: R$ 1800.0, winRate: 0.0%, wins: 0, loses: 1]

@@ -37,10 +37,36 @@ public class TableActions {
     }
 
     public boolean isBlackjack(List<String> cards) {
-        return cards.contains("A") && cards.contains("♥") || cards.contains("♦") || cards.contains("♣") || cards.contains("♠");
+        return sumCards(cards) == 21 && cards.size() == 2;
     }
 
     public boolean canInsurance(String card) {
         return card.contains("A");
+    }
+
+    public boolean canSplit(List<String> cards, int playerCardNumber) {
+        if (cards.get(0).equals(cards.get(1)) && playerCardNumber == 2) {
+            return true;
+        } else {
+            System.out.println("You can only slip on cards with equal ranks like: AA, 22, QQ");
+            return false;
+        }
+    }
+
+    public boolean canDoubleDown(List<String> cards, int playerCardNumber) {
+        if (sumCards(cards.subList(0,playerCardNumber)) <= 11 && playerCardNumber == 2) {
+            return true;
+        } else {
+            System.out.println("You can only double down if your total is equal or less than 11.");
+            return false;
+        }
+    }
+
+    public List<String> setDealerCards(List<String> deck) {
+        return deck.subList(0,9); // 2 + 2 + 2 + 2 + 3 + 3 + 3 + 3 + 4 (BUST) -> 9 max
+    }
+
+    public List<String> setPlayerCards(List<String> deck) {
+        return deck.subList(10, 52);
     }
 }
