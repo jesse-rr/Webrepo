@@ -1,4 +1,4 @@
-<h2 style="text-align: center;">Blackjack (21) - A Card Game</h2>
+<h1 style="text-align: center;"> Blackjack (21) - A Card Game </h1>
 
 <p align="center">
   <img src="https://github.com/jesse-rr/Webrepo/blob/main/Black_jack/run/blackjack.png" alt="Help screen">
