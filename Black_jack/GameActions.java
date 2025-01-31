@@ -15,21 +15,38 @@ public class GameActions {
         boolean noInsurance = true;
         double insurance = 0.0;
         String confirm = "";
+//        int maxSplitTimes = 3; // TODO maybe?
+
+        if (dealer_cards.getFirst().charAt(0) == 'A' && table.isBlackjack(dealer_cards.subList(0, dealerCardNumber))) {
+            PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,true,table);
+            Thread.sleep(1200);
+            System.out.println("Dealer has Ace as upcard, checking for blackjack (A + 10)");
+            Thread.sleep(3000);
+            PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,false,table);
+            Thread.sleep(1000);
+            if (table.isBlackjack(player_cards)) {
+                System.out.println("It's a tie! Both dealer and player have blackjack.");
+                Thread.sleep(1000);
+            } else {
+                System.out.println("Player lost! Dealer has blackjack.");
+                System.out.println("+ 1 Loss");
+                Thread.sleep(1000);
+            }
+            return;
+        }
+
 
         do {
-            PrintASCII.printlnMenu(4);
-            PrintASCII.printCards(dealer_cards, dealerCardNumber, true, table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1)));
-            PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-            PrintASCII.printlnMenu(5);
+            PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,true,table);
 
             Scanner userInput = new Scanner(System.in);
             System.out.println("""
                     (1) - Hit
                     (2) - Stand
                     (3) - Double Down
-                    (4) - Split
-                    (5) - Surrender
-                    (6) - Insurance
+                    (4) - Surrender
+                    (5) - Insurance
+                    [press 'h' for help]
                     """);
             String decision = userInput.next().trim().toLowerCase();
             switch (decision) {
@@ -40,12 +57,16 @@ public class GameActions {
                     noWinner = standLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
                     break;
                 case "3":
-                    doubleDownLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
+                    noWinner = doubleDownLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
                     break;
+//                case "4":
+//                        if (table.isTwoAces(player_cards.subList(0, playerCardNumber))) {
+//                            return;
+//                        }
+//                        table.canSplit(player_cards, playerCardNumber);
+//                        splitLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber, maxSplitTimes);
+//                    break;
                 case "4":
-                    table.canSplit(player_cards, playerCardNumber);
-                    break;
-                case "5":
                     System.out.print("Are you sure of Surrender? I'll not count as a loss, but half your bet will be lost. Y/N: ");
                     confirm = userInput.next().trim().toLowerCase().substring(0, 1);
                     switch (confirm) {
@@ -56,7 +77,7 @@ public class GameActions {
                             break;
                     }
                     break;
-                case "6":
+                case "5":
                     if (noInsurance) {
                         insurance = insuranceLogic(table, dealer_cards, bet, userInput);
                         if (insurance > 0) {
@@ -65,15 +86,43 @@ public class GameActions {
                     } else {
                         System.out.println("You're already insured!");
                     }
+                    Thread.sleep(2000);
+                    break;
+                case "h":
+                    boolean exit = true;
+                    do {
+                        PrintASCII.printlnMenu(2);
+                        confirm = userInput.next().trim().toLowerCase();
+                        switch (confirm) {
+                            case "x":
+                                exit = false;
+                                break;
+                            default:
+                                System.out.println("Not a valid option! Try again");
+                                Thread.sleep(2000);
+                        }
+                    } while (exit);
+                    break;
             }
         } while (noWinner);
     }
 
+//    private static void splitLogic(List<String> dealer_cards, List<String> player_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber, int maxSplitTimes) {
+//        for (int i = 0; i<maxSplitTimes; i++) {
+//            Scanner userInput = new Scanner(System.in);
+//            System.out.printf("Place bet for hand [ %s ]: ",i);
+//            PrintASCII.printlnMenu(4);
+//            PrintASCII.printCards(dealer_cards, dealerCardNumber, true, table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1)));
+//            PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
+//            PrintASCII.printlnMenu(5);
+//
+//            double new_bet = Double.parseDouble(userInput.nextLine().trim().replace(',','.'));
+//
+//        }
+//    } TODO maybe?
+
     private static boolean hitLogic(List<String> player_cards, List<String> dealer_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber) throws InterruptedException, IOException {
-        PrintASCII.printlnMenu(4);
-        PrintASCII.printCards(dealer_cards, dealerCardNumber, true, table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1)));
-        PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-        PrintASCII.printlnMenu(5);
+        PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,true,table);
 
         int playerTotal = table.sumCards(player_cards.subList(0, playerCardNumber));
         boolean isPlaying = true;
@@ -83,23 +132,22 @@ public class GameActions {
             Thread.sleep(2000);
 
             playerTotal = table.sumCards(player_cards.subList(0, playerCardNumber += 1));
-            PrintASCII.printlnMenu(4);
-            PrintASCII.printCards(dealer_cards, dealerCardNumber, true, table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1)));
-            PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-            PrintASCII.printlnMenu(5);
+            PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,true,table);
             Thread.sleep(1000);
 
             if (playerTotal > 21) {
                 System.out.println("Player has gone over 21! Dealer wins.");
+                System.out.println("+ 1 Loss");
+                Thread.sleep(2000);
                 return verifyWinnerPayments(2, player, insurance, bet, table, player_cards, dealer_cards);
             }
 
             System.out.println("""
-                ┏┳┓       ┏┓   •
-                 ┃ ┓┏┏┏┓  ┃┃┏┓╋┓┏┓┏┓┏
-                 ┻ ┗┻┛┗┛  ┗┛┣┛┗┗┗┛┛┗┛
-                            ┛
-                (1) - Hit | Stand - (2)
+                 ┏┳┓       ┏┓   •
+                  ┃ ┓┏┏┏┓  ┃┃┏┓╋┓┏┓┏┓┏
+                  ┻ ┗┻┛┗┛  ┗┛┣┛┗┗┗┛┛┗┛
+                             ┛
+                 (1) - Hit | Stand - (2)
                 """);
             Scanner userInput = new Scanner(System.in);
             String decision = userInput.next().trim().substring(0, 1);
@@ -119,61 +167,76 @@ public class GameActions {
         return standLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
     }
 
-    public static void doubleDownLogic(List<String> dealer_cards, List<String> player_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber) throws IOException, InterruptedException {
-        if (table.canDoubleDown(player_cards, playerCardNumber)) {
-
-            PrintASCII.printlnMenu(4);
-            PrintASCII.printCards(dealer_cards, dealerCardNumber, true, table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1)));
-            PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-            PrintASCII.printlnMenu(5);
-
-            player.setBalance(player.getBalance() - bet);
-            bet = bet * 2;
-            standLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
+    public static boolean doubleDownLogic(List<String> dealer_cards, List<String> player_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber) throws IOException, InterruptedException {
+        if (!table.canDoubleDown(player_cards, playerCardNumber)) {
+            System.out.println("You can only double down if your total is 11 or less.");
+            Thread.sleep(2000);
+            return true;
         }
+        System.out.println("Player chooses to double down. One more card will be dealt!");
+        Thread.sleep(2000);
+
+
+        player.setBalance(player.getBalance() - bet);
+        bet = bet * 2;
+        int playerCardTotal = table.sumCards(player_cards.subList(0, playerCardNumber+=1));
+
+        PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,true,table);
+
+        if (playerCardTotal > 21) {
+            System.out.println("Player has gone over 21! Dealer wins.");
+            System.out.println("+ 1 Loss");
+            Thread.sleep(2000);
+            return verifyWinnerPayments(2, player, insurance, bet, table, player_cards, dealer_cards);
+        }
+
+        return standLogic(dealer_cards, player_cards, table, insurance, player, bet, dealerCardNumber, playerCardNumber);
     }
 
+
+
     private static boolean standLogic(List<String> dealer_cards, List<String> player_cards, TableActions table, double insurance, Player player, double bet, int dealerCardNumber, int playerCardNumber) throws InterruptedException, IOException {
-        PrintASCII.printlnMenu(4);
-        PrintASCII.printCards(dealer_cards, dealerCardNumber, false, table.sumCards(dealer_cards.subList(0, dealerCardNumber)));
-        PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-        PrintASCII.printlnMenu(5);
+        PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,false,table);
+
         int winner = 0;
 
         int dealerTotal = table.sumCards(dealer_cards.subList(0, dealerCardNumber));
 
         while (dealerTotal < 17) {
-            Thread.sleep(3000);
-            System.out.print("Dealer hits!" + "\r");
+            Thread.sleep(1000);
+            System.out.println("Dealer hits!");
             Thread.sleep(2000);
 
             dealerTotal = table.sumCards(dealer_cards.subList(0, ++dealerCardNumber));
-            PrintASCII.printlnMenu(4);
-            PrintASCII.printCards(dealer_cards, dealerCardNumber, false, table.sumCards(dealer_cards.subList(0, dealerCardNumber)));
-            PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
-            PrintASCII.printlnMenu(5);
-            Thread.sleep(2000);
+            PrintASCII.printFullBoard(dealer_cards,player_cards,dealerCardNumber,playerCardNumber,false,table);
+            Thread.sleep(1000);
         }
 
         if (dealerTotal > 21) {
             Thread.sleep(1000);
             System.out.println("Dealer has gone over 21! Player wins.");
+            System.out.println("+ 1 Win");
+            Thread.sleep(2000);
             winner = 1;
         } else {
+            Thread.sleep(1000);
+            System.out.println("Dealer stands!");
             int playerTotal = table.sumCards(player_cards.subList(0, playerCardNumber));
 
             if (dealerTotal > playerTotal) {
-                Thread.sleep(2000);
                 System.out.println("Dealer wins!");
+                System.out.println("+ 1 Loss");
+                Thread.sleep(2000);
                 winner = 2;
             } else if (dealerTotal < playerTotal) {
-                Thread.sleep(2000);
                 System.out.println("Player wins!");
+                System.out.println("+ 1 Win");
+                Thread.sleep(2000);
                 winner = 1;
             } else {
-                Thread.sleep(2000);
                 System.out.println("It's a tie!");
                 winner = -1;
+                Thread.sleep(2000);
             }
         }
         return verifyWinnerPayments(winner, player, insurance, bet, table, player_cards, dealer_cards);

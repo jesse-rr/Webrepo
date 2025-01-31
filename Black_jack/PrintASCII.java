@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 
 public class PrintASCII {
@@ -5,7 +6,6 @@ public class PrintASCII {
     public static List<String> printCards(List<String> deck, int numCards, boolean isDealerCards, int showCardNumber) {
         int cardWidth = 19;
         int cardHeight = 13;
-
         printTopBorder(cardWidth, numCards, isDealerCards);
         System.out.println();
         for (int i = 0; i < cardHeight - 2; i++) {
@@ -95,9 +95,10 @@ public class PrintASCII {
         }
     }
 
-    public static void printlnMenu(int menuNumber) {
+    public static void printlnMenu(int menuNumber) throws InterruptedException {
         switch (menuNumber) {
             case 1:
+                flushConsole();
                 System.out.println("""
                     ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
 
@@ -117,7 +118,8 @@ public class PrintASCII {
                     """);
                 break;
             case 2:
-                System.out.println("""
+                flushConsole();
+                System.out.print("""
                     ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
 
                      ▀█████████▄   ▄█          ▄████████  ▄████████    ▄█   ▄█▄      ▄█    ▄████████ ▄████████    ▄█   ▄█▄
@@ -138,14 +140,17 @@ public class PrintASCII {
                                      To win, beat the dealer’s hand or hit a Blackjack (Ace + 10) = (21)
             
                                          «［ Here are the key commands you can use during the game! ］»
-                      ■ 𝗛𝗶𝘁 = Take another card to improve your hand.
+                      ■ 𝗛𝗶𝘁 = Take another card to improve your hand, after, you can only Hit or Stand.
                       ■ 𝗦𝘁𝗮𝗻𝗱 = Keep your current hand, no more cards.
-                      ■ 𝗗𝗼𝘂𝗯𝗹𝗲 𝗱𝗼𝘄𝗻 = Double your bet and take one more card.
-                      ■ 𝗦𝗽𝗹𝗶𝘁 = Divide a pair of cards into two separate hands, each with its own bet.
+                      ■ 𝗗𝗼𝘂𝗯𝗹𝗲 𝗱𝗼𝘄𝗻 = Double your bet and take ONE more card. Only possible if hand value < 12
+                      ■ 𝗦𝗽𝗹𝗶𝘁 = Divide a pair of cards into two separate hands, each with its own bet. [NOT IMPLEMENTED]
                       ■ 𝗦𝘂𝗿𝗿𝗲𝗻𝗱𝗲𝗿 = Forfeit your hand and get half your bet back.
                       ■ 𝗜𝗻𝘀𝘂𝗿𝗮𝗻𝗰𝗲 = Bet on the dealer having a blackjack if their upcard is an Ace.
             
                                                             «[ Additional Tips ]»
+                                                  The dealer hits if total card value < 17.
+                                           If a individual has 2 Aces, it will count as 12, not 22.
+                                If the dealer has an Ace, he will check for a blackjack, if he has, game ends.
                                Don’t split Aces and 8s too often: Only split if the dealer’s card is weak (2-6).
                                  Stand on 12-16 if the dealer shows 2-6: The dealer is more likely to lose.
 
@@ -156,6 +161,7 @@ public class PrintASCII {
                     """);
                 break;
             case 3:
+                flushConsole();
                 System.out.println("""
                     ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
                                                             ♣  ♠  Blackjack  ♥  ♦
@@ -169,7 +175,8 @@ public class PrintASCII {
                     """);
                 break;
             case 4:
-                System.out.println("""
+                flushConsole();
+                System.out.print("""
                     ╟►────────────────────────────────◄═══════════[[████]]══════════►─────────────────────────────────────◄╣
                                                                 🃏  Dealer  🃏
                     """);
@@ -183,7 +190,8 @@ public class PrintASCII {
         }
     }
     
-    public static void printFMenu(Player player, int menuNumber) {
+    public static void printFMenu(Player player, int menuNumber) throws InterruptedException {
+        flushConsole();
         switch (menuNumber) {
             case 1:
                 System.out.printf("""
@@ -214,5 +222,32 @@ public class PrintASCII {
                     """, player.getBalance());
                 break;
         }
+    }
+
+    private static void flushConsole() throws InterruptedException {
+        String os_name = System.getProperty("os.name").toLowerCase();
+        if (os_name.contains("win")) {
+            try {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }
+    }
+
+    public static void printFullBoard(List<String> dealer_cards, List<String> player_cards, int dealerCardNumber, int playerCardNumber, boolean isDealerCards, TableActions table) throws InterruptedException {
+        int sum;
+        if (isDealerCards) {
+            sum = table.sumCards(dealer_cards.subList(0, dealerCardNumber - 1));
+        } else {
+            sum = table.sumCards(dealer_cards.subList(0, dealerCardNumber));
+        }
+        PrintASCII.printlnMenu(4);
+        PrintASCII.printCards(dealer_cards, dealerCardNumber, isDealerCards, sum);
+        PrintASCII.printCards(player_cards, playerCardNumber, false, table.sumCards(player_cards.subList(0, playerCardNumber)));
+        PrintASCII.printlnMenu(5);
     }
 }

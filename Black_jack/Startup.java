@@ -9,6 +9,8 @@ public class Startup {
     }
 
     private static void firstMenu() throws IOException, InterruptedException {
+        String username = "";
+        String password = "";
         do {
             PrintASCII.printlnMenu(3);
             Scanner userInput = new Scanner(System.in);
@@ -19,7 +21,7 @@ public class Startup {
                     signIn();
                     break;
                 case "l":
-                    logIn();
+                    logIn(username, password);
                     break;
                 case "g":
                     Player guestPlayer = new Player("Guest", "password", 2000.00, 0.0, 0, 0);
@@ -30,29 +32,36 @@ public class Startup {
                     break;
                 default:
                     System.out.println("Invalid choice. Try again.");
+                    Thread.sleep(2000);
             }
         } while (true);
     }
 
-    private static void logIn() throws IOException, InterruptedException {
-        FileReader reader = new FileReader("./user_data.txt");
+    private static void logIn(String username, String password) throws IOException, InterruptedException {
+        File file = new File("./user_data.txt");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        FileReader reader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
         Player loggedInPlayer = null;
         boolean notValid = true;
         Scanner userInput = new Scanner(System.in);
-        String username = "";
-        String password = "";
 
         do {
-            System.out.print("Enter username: ");
-            username = userInput.next();
-            System.out.print("Enter password: ");
-            password = userInput.next();
-            if ((username.contains(" ") || username.isBlank()) || (password.contains(" ") || password.isBlank() || password.length() <= 5)) {
-                System.out.println("Username/password cannot have 'space', be blank, or have a password less than 5 characters.");
-            } else {
+            if (!username.isEmpty() && !password.isEmpty()) {
                 notValid = false;
+            } else {
+                System.out.print("Enter username: ");
+                username = userInput.next();
+                System.out.print("Enter password: ");
+                password = userInput.next();
+                if ((username.contains(" ") || username.isBlank()) || (password.contains(" ") || password.isBlank() || password.length() <= 5)) {
+                    System.out.println("Username/password cannot have 'space', be blank, or have a password less than 5 characters.");
+                } else {
+                    notValid = false;
+                }
             }
         } while (notValid);
 
@@ -78,6 +87,7 @@ public class Startup {
             }
         }
         bufferedReader.close();
+        Thread.sleep(2000);
 
         if (loggedInPlayer == null) {
             System.out.println("Login failed. Invalid username or password.");
@@ -86,7 +96,7 @@ public class Startup {
         }
     }
 
-    private static void signIn() throws IOException {
+    private static void signIn() throws IOException, InterruptedException {
         Scanner inputName = new Scanner(System.in);
         String username = "";
         String password = "";
@@ -114,6 +124,7 @@ public class Startup {
         while ((line = reader.readLine()) != null) {
             if (line.contains("name: " + username)) {
                 System.out.println("Username already exists. Please choose a different username.");
+                Thread.sleep(2000);
                 reader.close();
                 return;
             }
@@ -121,11 +132,13 @@ public class Startup {
         reader.close();
 
         FileWriter writer = new FileWriter(file, true);
-        String userInfo = "player: [name: " + username + ", password: " + Base64.getEncoder().encodeToString(password.getBytes()) + ", balance: R$ 2000.0, winRate: 0%, wins: 0, loses: 0]";
+        String userInfo = String.format("player: [name: %s, password: %s, balance: R$ %s, winRate: %s%%, wins: %s, loses: %s]",username,Base64.getEncoder().encodeToString(password.getBytes()),2000,0,0,0);
         writer.write(userInfo + "\n");
         writer.close();
 
         System.out.println("User signed up successfully!");
+        Thread.sleep(2000);
+        logIn(username, password);
     }
 
     private static void mainMenu(Player player) throws IOException, InterruptedException {
@@ -150,11 +163,12 @@ public class Startup {
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
+                    Thread.sleep(2000);
             }
         } while (exit);
     }
 
-    private static void helpMenu(boolean exit) {
+    private static void helpMenu(boolean exit) throws InterruptedException {
         do {
             PrintASCII.printlnMenu(2);
             Scanner userInput = new Scanner(System.in);
@@ -165,11 +179,12 @@ public class Startup {
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
+                    Thread.sleep(2000);
             }
         } while (exit);
     }
 
-    private static void account(Player player, boolean exit) {
+    private static void account(Player player, boolean exit) throws InterruptedException {
         do {
             PrintASCII.printFMenu(player, 1);
             Scanner userInput = new Scanner(System.in);
@@ -180,6 +195,7 @@ public class Startup {
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
+                    Thread.sleep(2000);
             }
         } while (exit);
     }
@@ -194,6 +210,7 @@ public class Startup {
             bet = Double.parseDouble(input);
             if (bet > player.getBalance()) {
                 System.out.println("Not a valid option! Try again, the amount must be within balance of player");
+                Thread.sleep(2000);
             } else {
                 break;
             }
@@ -243,4 +260,5 @@ public class Startup {
         }
         writer.close();
     }
+
 }
