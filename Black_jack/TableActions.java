@@ -21,6 +21,11 @@ public class TableActions {
 
     public int sumCards(List<String> cards) {
         int sum = 0;
+        if (cards.size() == 2) {
+            if (isTwoAces(cards)) {
+                return 12;
+            }
+        }
         for (String card : cards) {
             String cardValue = card.replaceAll("[^0-9]", "");
             if (cardValue.isEmpty()) {
@@ -40,12 +45,16 @@ public class TableActions {
         return sumCards(cards) == 21 && cards.size() == 2;
     }
 
+    public boolean isTwoAces(List<String> cards) {
+        return cards.get(0).charAt(0) == 'A' && cards.get(1).charAt(0) == 'A';
+    }
+
     public boolean canInsurance(String card) {
         return card.contains("A");
     }
 
     public boolean canSplit(List<String> cards, int playerCardNumber) {
-        if (cards.get(0).equals(cards.get(1)) && playerCardNumber == 2) {
+        if (cards.get(0).substring(0,1).equals(cards.get(1).substring(0,1)) && playerCardNumber == 2) {
             return true;
         } else {
             System.out.println("You can only slip on cards with equal ranks like: AA, 22, QQ");
@@ -66,7 +75,7 @@ public class TableActions {
         return deck.subList(0,9); // 2 + 2 + 2 + 2 + 3 + 3 + 3 + 3 + 4 (BUST) -> 9 max
     }
 
-    public List<String> setPlayerCards(List<String> deck) {
+    public List<String>  setPlayerCards(List<String> deck) {
         return deck.subList(10, 52);
     }
 }

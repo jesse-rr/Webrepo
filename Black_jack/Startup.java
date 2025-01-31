@@ -140,13 +140,13 @@ public class Startup {
                     startGame(player);
                     break;
                 case "a":
-                    account(player);
+                    account(player, exit);
                     break;
                 case "x":
                     exit = false;
                     break;
                 case "h":
-                    helpMenu();
+                    helpMenu(exit);
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
@@ -154,34 +154,34 @@ public class Startup {
         } while (exit);
     }
 
-    private static void helpMenu() {
+    private static void helpMenu(boolean exit) {
         do {
             PrintASCII.printlnMenu(2);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
             switch (menuChoice) {
                 case "x":
+                    exit = false;
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
             }
-            break;
-        } while (true);
+        } while (exit);
     }
 
-    private static void account(Player player) {
+    private static void account(Player player, boolean exit) {
         do {
             PrintASCII.printFMenu(player, 1);
             Scanner userInput = new Scanner(System.in);
             String menuChoice = userInput.next().trim().toLowerCase();
             switch (menuChoice) {
                 case "x":
+                    exit = false;
                     break;
                 default:
                     System.out.println("Not a valid option! Try again");
             }
-            break;
-        } while (true);
+        } while (exit);
     }
 
     private static void startGame(Player player) throws IOException, InterruptedException {
@@ -198,6 +198,7 @@ public class Startup {
                 break;
             }
         } while (true);
+        player.setBalance(player.getBalance() - bet);
         GameActions.table(player, bet);
     }
 
