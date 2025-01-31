@@ -38,7 +38,7 @@ public class Startup {
     }
 
     private static void logIn(String username, String password) throws IOException, InterruptedException {
-        File file = new File("./user_data.txt");
+        File file = new File("data/user.txt");
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -115,7 +115,7 @@ public class Startup {
             }
         } while (notValid);
 
-        File file = new File("./user_data.txt");
+        File file = new File("data/user.txt");
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -220,7 +220,7 @@ public class Startup {
     }
 
     public static void savePlayerInfo(Player player) throws IOException {
-        File file = new File("./user_data.txt");
+        File file = new File("data/user.txt");
         if (!file.exists()) {
             file.createNewFile();
         }
