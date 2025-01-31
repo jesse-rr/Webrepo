@@ -1,4 +1,3 @@
-#Blackjack (21) - A card Game
 <p align="center">
   <img src="https://github.com/jesse-rr/Webrepo/blob/main/Black_jack/run/blackjack.png" alt="Help screen">
 </p>
