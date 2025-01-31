@@ -1,7 +1,7 @@
 <h2 style="text-align: center;">Blackjack (21) - A Card Game</h2>
 
 <p align="center">
-  <img src="Webrepo/Black_jack/run/blackjack.png" alt="Help screen">
+  <img src="jerreWebrepo/Black_jack/run/blackjack.png](https://github.com/jesse-rr/Webrepo/blob/main/Black_jack/run/blackjack.png" alt="Help screen">
 </p>
 
 #### Running the game 
