@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @EnableKafka
 @SpringBootApplication
-public class NWebscrapperApplication {
+public class NWebscrapperApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(NWebscrapperApplication.class, args);

@@ -22,7 +22,6 @@ public class Website {
     private String url;
     @ElementCollection
     private Set<String> pages;
-
     private boolean isWorking;
     private String notes;
 }

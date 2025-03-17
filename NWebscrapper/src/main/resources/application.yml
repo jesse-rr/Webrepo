@@ -1,11 +1,14 @@
 spring:
   application:
     name: NWeb-scrapper
+  config:
+    import: optional:application.yml
 
   jpa:
     hibernate:
       ddl-auto: create-drop
     database: postgresql
+    show-sql: true
   datasource:
     driver-class-name: org.postgresql.Driver
     password: admin
@@ -21,6 +24,7 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 
 server:
   port: 8080

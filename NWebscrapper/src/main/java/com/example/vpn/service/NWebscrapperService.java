@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -33,12 +35,13 @@ public class NWebscrapperService {
                 website.setPages(pages);
                 webscrapperRepository.save(website);
             } else {
-                Website.builder()
+                Website saveWebsite = Website.builder()
                         .url(url)
                         .isWorking(isUrlWorking(url))
                         .pages(pages)
                         .notes("USE THIS TO DEFINE WHICH DATA IS OBTAINED FROM THIS SITE, ERRORS OR JUST SIMPLE NOTES...")
                         .build();
+                webscrapperRepository.save(saveWebsite);
             }
         });
     }
@@ -69,11 +72,17 @@ public class NWebscrapperService {
         for (String url : urls) {
             Set<String> pages = new HashSet<>();
             try {
-                Document document = Jsoup.connect(url).get();
+                Document document = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
+                        .followRedirects(false)
+                        .get();
                 Elements links = document.select("a[href]");
 
                 for (Element link : links) {
-                    pages.add(link.attr("href"));
+                    if (!isUrlUnnecessary(link.attr("href"))) {
+                        String parsedUrl = parseUrl(link.attr("href"), url);
+                        pages.add(parsedUrl);
+                    }
                 }
             } catch (Exception e) {
             }
@@ -84,10 +93,13 @@ public class NWebscrapperService {
         }
     }
 
-    public void scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, boolean isOutput) {
+    public void scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Map<Boolean, String> outputFile) {
         List<String> extractedResponse = new ArrayList<>();
         try {
-            Document document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
+                    .followRedirects(false)
+                    .get();
             for (int i=0; i<cssSelectors.size(); i++) {
                 Element selector = document.selectFirst(cssSelectors.get(i));
                 if (selector == null) {
@@ -102,6 +114,11 @@ public class NWebscrapperService {
                     case TEXT:
                         extractedResponse.add(selector.text());
                         break;
+                    case USER_CHOICE:
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.print("ENTER EXTRACTION-METHOD :: ");
+                        extractedResponse.add(selector.attr(scanner.nextLine()));
+                        break;
                     default:
                         extractedResponse.add(selector.attr(extractions.get(i).getValue()));
                         break;
@@ -110,14 +127,14 @@ public class NWebscrapperService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (isOutput) {
-            outputAsFile(extractedResponse);
+        if (outputFile.keySet().equals(true)) {
+            outputAsFile(extractedResponse, outputFile.get(true));
         }
     }
 
-    public void outputAsFile(List<String> params) {
+    public void outputAsFile(List<String> params, String fileName) {
         try {
-            FileWriter writer = new FileWriter("/home/jrr/output"+Math.abs(Math.random()*1000)+".txt");
+            FileWriter writer = new FileWriter("/home/jrr/"+fileName+".txt");
             for (int i=0; i<params.size(); i++) {
                 writer.write(params.get(i)+"\n");
             }
@@ -126,4 +143,20 @@ public class NWebscrapperService {
         }
     }
 
+    private boolean isUrlUnnecessary(String url) {
+        // Broken links, events, tracking params, captcha
+        if (url.startsWith("#") || url.contains("javascript") || url.contains("ref=") || url.contains("utm_source=") || url.contains("captcha")) {
+            return true;
+        }
+        return false;
+    }
+
+    private String parseUrl(String url, String initialUrl) throws MalformedURLException {
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            return url;
+        }
+        URL parsedInitialUrl = new URL(initialUrl);
+        URL resolvedUrl = new URL(parsedInitialUrl, url);
+        return resolvedUrl.toString();
+    }
 }

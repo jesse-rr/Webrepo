@@ -24,7 +24,8 @@ public enum ExtractionMethod {
     REL("rel"),
     NAME("name"),
     TYPE("type"),
-    ALL("all");
+    ALL("all"),
+    USER_CHOICE("");
 
     private final String value;
 }

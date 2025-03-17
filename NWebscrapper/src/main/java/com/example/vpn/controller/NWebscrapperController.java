@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -24,9 +25,9 @@ public class NWebscrapperController {
             @RequestParam String url,
             @RequestParam List<String> cssSelectors,
             @RequestParam List<ExtractionMethod> extractions,
-            @RequestParam boolean isOutput
-    ) {
-        webscrapperConsumer.consumeWebscrapperKafkaUrl(url, cssSelectors, extractions, isOutput);
+            @RequestParam(required = false) Map<Boolean, String> outputFile
+            ) {
+        webscrapperConsumer.consumeWebscrapperKafkaUrl(url, cssSelectors, extractions, outputFile);
         return ResponseEntity.ok().build();
     }
 

@@ -1,0 +1,4 @@
+dev-config:
+  postgresql:
+    username: jrr
+    password: admin

@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public class NWebscrapperConsumer {
     private final NWebscrapperService webscrapperService;
 
     @KafkaListener(topics = {"crawler-topic"}, groupId = "webscrapper-group")
-    public void consumeWebscrapperKafkaUrl(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, boolean isOutput) {
-        webscrapperService.scrape(url, cssSelectors, extractions, isOutput);
+    public void consumeWebscrapperKafkaUrl(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Map<Boolean, String> outputFile) {
+        webscrapperService.scrape(url, cssSelectors, extractions, outputFile);
     }
 }
