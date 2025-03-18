@@ -1,6 +1,7 @@
 package com.example.vpn.service;
 
 import com.example.vpn.models.ExtractionMethod;
+import com.example.vpn.models.ParseType;
 import com.example.vpn.models.Website;
 import com.example.vpn.repository.NWebscrapperRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 public class NWebscrapperService {
 
     private final NWebscrapperRepository webscrapperRepository;
+    private final ExportService exportService;
 
     public void addUrlToScrapperDB(List<String> urls, Set<String> pages) {
         urls.forEach(url -> {
@@ -93,7 +95,8 @@ public class NWebscrapperService {
         }
     }
 
-    public void scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Map<Boolean, String> outputFile) {
+    public List<String> scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Boolean isExport, String f_name, ParseType parseType) {
+        log.info("f_name :: {}, parseType :: {}",f_name,parseType);
         List<String> extractedResponse = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -127,20 +130,28 @@ public class NWebscrapperService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (outputFile.keySet().equals(true)) {
-            outputAsFile(extractedResponse, outputFile.get(true));
+        if (isExport) {
+            outputAsFile(extractedResponse, f_name, parseType);
+        }
+        return extractedResponse;
+    }
+
+    public void outputAsFile(List<String> data, String f_name, ParseType parseType) {
+        log.info("Attempting to create file :: {} :: with type :: {}",f_name,parseType);
+        switch (parseType) {
+            case TXT:
+                exportService.parseJsonToString(data, f_name, parseType.getParseValue());
+                break;
+            case JSON:
+                exportService.parseStringToJson(data, f_name, parseType.getParseValue());
+                break;
+            default:
+                throw new RuntimeException("OUTPUT PARSE NOT EXISTENT");
         }
     }
 
-    public void outputAsFile(List<String> params, String fileName) {
-        try {
-            FileWriter writer = new FileWriter("/home/jrr/"+fileName+".txt");
-            for (int i=0; i<params.size(); i++) {
-                writer.write(params.get(i)+"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-        }
+    public void outputAsFile(List<String> csv_headers, List<String> csv_data, String f_name, ParseType parseType) {
+        exportService.parseStringToCsv(csv_headers, csv_data, f_name, parseType.getParseValue());
     }
 
     private boolean isUrlUnnecessary(String url) {

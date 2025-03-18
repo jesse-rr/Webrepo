@@ -1,6 +1,7 @@
 package com.example.vpn.controller;
 
 import com.example.vpn.models.ExtractionMethod;
+import com.example.vpn.models.ParseType;
 import com.example.vpn.models.Website;
 import com.example.vpn.service.NWebscrapperConsumer;
 import com.example.vpn.service.NWebscrapperService;
@@ -21,14 +22,15 @@ public class NWebscrapperController {
     private final NWebscrapperConsumer webscrapperConsumer;
 
     @GetMapping("/scrape")
-    public ResponseEntity<Void> scrapeUrl(
+    public ResponseEntity<List<String>> scrapeUrl(
             @RequestParam String url,
             @RequestParam List<String> cssSelectors,
             @RequestParam List<ExtractionMethod> extractions,
-            @RequestParam(required = false) Map<Boolean, String> outputFile
-            ) {
-        webscrapperConsumer.consumeWebscrapperKafkaUrl(url, cssSelectors, extractions, outputFile);
-        return ResponseEntity.ok().build();
+            @RequestParam Boolean isExport,
+            @RequestParam String f_name,
+            @RequestParam ParseType parseType
+    ) {
+        return ResponseEntity.ok(webscrapperConsumer.consumeWebscrapperKafkaUrl(url, cssSelectors, extractions, isExport, f_name, parseType));
     }
 
     @PostMapping("/add-url")
