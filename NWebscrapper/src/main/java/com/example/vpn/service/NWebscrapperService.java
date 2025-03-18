@@ -1,5 +1,7 @@
 package com.example.vpn.service;
 
+import com.example.vpn.config.ExtractionFactory;
+import com.example.vpn.models.ExportType;
 import com.example.vpn.models.ExtractionMethod;
 import com.example.vpn.models.Website;
 import com.example.vpn.repository.NWebscrapperRepository;
@@ -19,7 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
-
 
 @Service
 @RequiredArgsConstructor
@@ -93,7 +94,7 @@ public class NWebscrapperService {
         }
     }
 
-    public void scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Map<Boolean, String> outputFile) {
+    public List<String> scrape(String url, List<String> cssSelectors, List<ExtractionMethod> extractions, Map<Boolean, String> outputFile, ExportType exportType) throws IOException{
         List<String> extractedResponse = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url)
@@ -127,19 +128,28 @@ public class NWebscrapperService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (outputFile.keySet().equals(true)) {
-            outputAsFile(extractedResponse, outputFile.get(true));
+        if (outputFile.containsKey(true)) {
+            outputAsFile(extractedResponse, outputFile.get(true), exportType);
         }
+        return extractedResponse;
     }
 
-    public void outputAsFile(List<String> params, String fileName) {
-        try {
-            FileWriter writer = new FileWriter("/home/jrr/"+fileName+".txt");
-            for (int i=0; i<params.size(); i++) {
-                writer.write(params.get(i)+"\n");
-            }
-            writer.close();
-        } catch (IOException e) {
+    public void outputAsFile(List<String> params, String fileName, ExportType exportType) throws IOException{
+        ExtractionFactory factory = new ExtractionFactory();
+        switch (exportType) {
+            case TXT:
+                factory.parseToTXT(params, fileName);
+                break;
+            case CSV:
+                // TODO MAKE CONTROLLER LATER, HAS TO BE DIFFERENT METHOD
+                factory.parseToCSV(params, fileName, params);
+                break;
+            case JSON:
+                // TODO SAME AS ABOVE
+//                factory.parseToJSON(params, fileName);
+                break;
+            default:
+                throw new RuntimeException("NOT VALID OPTION OF EXPORTATION");
         }
     }
 
