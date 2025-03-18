@@ -1,4 +1,4 @@
-. .env | Environment [LEARNED & Implemented]
+- .env | Environment [LEARNED & Implemented]
 - jwt [implemented]
 - external - Exchange API [implemented]
 - Async | Scheduled (cron) - [implemented]
