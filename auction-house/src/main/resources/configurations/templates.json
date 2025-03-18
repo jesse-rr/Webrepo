@@ -1,0 +1,38 @@
+{
+    "emailVerification": {
+      "subject": "Verify Your Email Address - [CODE]",
+      "body": "Hello [USER],\n\nWelcome to [Auction House Name]! To get started, please verify your email address by clicking the link below:\n[LINK]\nIf you did not create an account with us, please ignore this email.\n\nThank you,\nThe [AUCTION] Team"
+    },
+    "bidSent": {
+      "subject": "Your Bid Has Been Placed",
+      "body": "Hello [USER],\n\nYou have successfully placed a bid of [Bid Amount] on the following item:\n\nItem: [ITEM]\nAuction End: [TIME]\nYou will be notified if you are outbid or if you win the auction.\nThank you for bidding with [AUCTION]!\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "bidUpdate": {
+      "subject": "Update on Your Bid - [ITEM]",
+      "body": "Hello [USER],\n\nThere has been an update on your bid for the item [ITEM].\n\nCurrent Bid: [NEW BID AMOUNT]\nAuction End: [TIME]\n\nThank you for participating in the auction with [AUCTION]. We wish you the best of luck!\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "auctionWon": {
+      "subject": "Congratulations! You've Won the Auction for [ITEM]",
+      "body": "Hello [USER],\n\nCongratulations! You've won the auction for [ITEM] with your bid of [WINNING BID].\n\nPlease complete the payment to finalize your purchase. The item will be shipped to your registered address once payment is received.\n\nThank you for bidding with [AUCTION]!\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "auctionLost": {
+      "subject": "Auction Ended - You Were Outbid on [ITEM]",
+      "body": "Hello [USER],\n\nThe auction for [ITEM] has ended, and unfortunately, you were outbid. The winning bid was [WINNING BID].\n\nThank you for participating in the auction. Keep an eye on upcoming auctions on [AUCTION].\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "accountRemoval": {
+      "subject": "Your Account Has Been Removed",
+      "body": "Hello [USER],\n\nWe're sorry to see you go! Your account with [AUCTION] has been removed as per your request. If you didn't request account removal or have any further questions, please contact our support team at [SUPPORT EMAIL].\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "accountDeletionConfirmation": {
+      "subject": "Account Deletion Confirmation",
+      "body": "Hello [USER],\n\nThis is to confirm that your account has been permanently deleted from [AUCTION]. All your personal data and bids have been removed from our system.\n\nIf you change your mind, you can always re-register.\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "passwordResetRequest": {
+      "subject": "Password Reset Request",
+      "body": "Hello [USER],\n\nWe received a request to reset your password for your [AUCTION] account. To proceed, click the link below:\n[LINK]\nIf you did not request a password reset, please ignore this email.\n\nBest regards,\nThe [AUCTION] Team"
+    },
+    "passwordResetConfirmation": {
+      "subject": "Your Password Has Been Reset",
+      "body": "Hello [USER],\n\nYour password has been successfully reset. If you did not make this request, please contact our support team immediately at [SUPPORT EMAIL].\n\nBest regards,\nThe [AUCTION] Team"
+  }
+}

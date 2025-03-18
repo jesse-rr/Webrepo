@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: auction-house
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWD}
+    url: ${DB_URL}
+
+  mail:
+    host: smtp.gmail.com
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWD}
+    port: 587
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+
+app:
+  jwt-secret: ${JWT_SECRET}
+  jwt-expiration: ${JWT_EXPIRATION}
+  exchange-api-key: ${EXCHANGE_API_KEY}
+  exchange-api-url: ${EXCHANGE_API_URL}
+  auction-name: Bidding Bee
+
+server:
+  port: 8080

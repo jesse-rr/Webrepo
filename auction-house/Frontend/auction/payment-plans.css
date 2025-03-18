@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('header.css');
+
+:root {
+  --color-1: #eeba2c;
+  --color-2: #000000;
+  --color-3: #161616;
+  --color-4: #212121;
+  --color-5: #262626;
+  --color-6: #ffffff;
+
+  --title-font: "Oswald", sans-serif;
+  --font: Arial, Helvetica, sans-serif; 
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--title-font);
+}
+
+body {
+  display: grid;
+  grid-template-rows: 160px 1fr 200px;
+  background-color: var(--color-2);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  height: 100vh;
+  width: 1300px;
+}
+
+.product-info {
+  display: grid;
+  grid-template-columns: 1fr 400px 0;
+  padding: 0 20px 10px 20px;
+  color: var(--color-6);
+}
+.product-title {
+  font-size: 3em;
+  font-weight: bold;
+  color: var(--color-1);
+}
+
+.product__div2 {
+  display: flex;
+  flex-direction: column;
+}
+.expand__btn {
+  padding: 10px 80px;
+  background-color: var(--color-1);
+  border-radius: 5px;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.product-img {
+  display: flex;
+  justify-content: center;
+}
+.product-img img{
+  width: 1000px;
+}
