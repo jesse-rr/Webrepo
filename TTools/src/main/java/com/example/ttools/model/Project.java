@@ -25,6 +25,7 @@ public class Project {
     @ElementCollection
     private Set<String> links;
     private String readMe;
+    private boolean isRemoved;
 
     @ElementCollection
     private Set<PLanguage> programmingLanguages;
@@ -37,16 +38,15 @@ public class Project {
     @ElementCollection
     private Set<WebDevTool> webDevTools;
 
-    public static void toProject() {
-        this.productId = productId;
-        this.name = name;
-        this.description = description;
-        this.links = links;
-        this.readMe = readMe;
-        this.programmingLanguages = programmingLanguages;
-        this.frameworks = frameworks;
-        this.sudoLanguages = sudoLanguages;
-        this.databases = databases;
-        this.webDevTools = webDevTools;
+    public void updateFromDTO(ProjectRequestDTO dto) {
+        this.name = dto.name();
+        this.description = dto.description();
+        this.links = dto.links();
+        this.readMe = dto.readMe();
+        this.webDevTools = dto.webDevTools();
+        this.programmingLanguages = dto.programmingLanguages();
+        this.databases = dto.databases();
+        this.sudoLanguages = dto.sudoPLanguages();
+        this.frameworks = dto.frameworks();
     }
 }

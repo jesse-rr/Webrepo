@@ -1,20 +1,18 @@
 package com.example.ttools;
 
-import com.example.ttools.model.Database;
-import com.example.ttools.model.Framework;
-import com.example.ttools.model.SudoPLanguage;
-import com.example.ttools.model.WebDevTool;
+import com.example.ttools.model.*;
 
-import java.util.List;
+import java.util.Set;
 
 public record ProjectRequestDTO(
         String name,
         String description,
-        String links,
+        Set<String> links,
         String readMe,
-        List<Framework> frameworks,
-        List<SudoPLanguage> sudoLanguages,
-        List<Database> databases,
-        List<WebDevTool> webDevTools
+        Set<PLanguage> programmingLanguages,
+        Set<Framework> frameworks,
+        Set<SudoPLanguage> sudoPLanguages,
+        Set<Database> databases,
+        Set<WebDevTool> webDevTools
 ) {
 }

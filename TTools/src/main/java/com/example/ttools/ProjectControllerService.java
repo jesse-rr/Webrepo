@@ -43,10 +43,22 @@ public class ProjectControllerService {
     @PutMapping("/alter/{id}")
     public ResponseEntity<Project> alterProjectById(
             @PathVariable(value = "id") Long projectId,
-            @RequestBody ProjectRequestDTO requestDTO
+            @RequestBody ProjectRequestDTO dto
     ) {
         Project project = getProjectById(projectId).getBody();
-        Project.(project, requestDTO);
+        if (project != null) {
+            project.updateFromDTO(dto);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(project);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteProjectById(
+            @PathVariable Long id
+    ) {
+        projectRepository.updateProjectToDeleted(id);
+        return ResponseEntity.noContent().build();
     }
 }
