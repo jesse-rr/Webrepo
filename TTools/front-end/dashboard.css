@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+  --font: "Bebas Neue", sans-serif;
+  --color-1: #705549;
+  --color-2: #46383c;
+  --color-3: #29232e;
+  --color-4: #191922;
+  --color-5: #0f0e12;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
 }
+
 body {
   display: grid;
   grid-template-rows: 100px 1fr 100px;
@@ -12,13 +25,60 @@ body {
 .main {
   position: relative;
   overflow: hidden;
-  background-color: black;
+  background-color: var(--color-4);
+  height: 100%;
+  display: grid;
+  grid-template-columns: 400px 1fr;
 }
 
 .aside {
-  background-color: burlywood;
-  max-width: 400px;
-  height: 100%;
+  background-color: var(--color-4);
+  position: relative;
+  z-index: 1;
+}
+
+.draggable-div {
+  position: absolute;
+  z-index: 9;
+  text-align: center;
+  border: 1px solid white;
+  top: 0;
+  left: 400px;
+}
+
+.draggable-header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: var(--color-2);
+}
+.draggable-header p {
+  font-family: var(--font);
+  font-size: 1.7em;
+}
+
+.draggable-div ul {
+  display: flex;
+  list-style: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: var(--color-1);
+  height: 100px;
+}
+.draggable-div ul li {
+  padding: 0 10px;
+}
+
+.draggable__li {
+  display: flex;
+  align-items: center;
+  transition: all ease-in-out .2s;
+}
+.draggable__li img {
+  height: 70px;
+}
+.draggable__li:hover {
+  background-color: #46383c;
 }
 
 .framework__ul {
@@ -28,32 +88,21 @@ body {
   height: 300px;
   overflow-y: scroll;
 }
+
 .framework__li img {
   height: 70px;
 }
 
-.draggable-div {
-  position: absolute;
-  z-index: 9;
-  background-color: #f1f1f1;
-  border: 1px solid #d3d3d3;
+.aside__form input{
+  width: 100%;
+  height: 40px;
+  font-size: 1.1em;
+  padding: 0 10px;
+  background-color: var(--color-3);
+}
+.aside__form-title {
+  font-family: var(--font);
   text-align: center;
-}
-
-.draggable-header {
-  padding: 10px;
-  cursor: move;
-  z-index: 10;
-  background-color: #114570;
-  color: #fff;
-}
-
-.draggable-div ul {
-  display: flex;
-  gap: 10px;
-  list-style: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  background-color: hsl(207, 73%, 78%);
-  height: 100px;
+  padding: 4px 0;
+  font-size: 1.9em;
 }

@@ -1,4 +1,5 @@
-document.querySelector(".main").style.backgroundImage = 'url("./stock/num.png")'.replace("num", Math.floor(Math.random() * 8));
+document.querySelector(".main").style.backgroundImage = 'url("./stock/1.png")';
+// .replace("num", Math.floor(Math.random() * 7));
 
 document.querySelectorAll('.draggable-div').forEach(div => {
   dragElement(div);
@@ -22,12 +23,29 @@ function dragElement(elmnt) {
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
+    
+    const main = document.querySelector('.main');
+    const mainRect = main.getBoundingClientRect();
+    const asideWidth = document.querySelector('.aside').offsetWidth;
+    
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    
+    let newTop = elmnt.offsetTop - pos2;
+    let newLeft = elmnt.offsetLeft - pos1;
+    
+    const minLeft = asideWidth;
+    const maxLeft = mainRect.width - elmnt.offsetWidth;
+    const minTop = 0;
+    const maxTop = mainRect.height - elmnt.offsetHeight;
+    
+    newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+    newTop = Math.max(minTop, Math.min(newTop, maxTop));
+    
+    elmnt.style.top = newTop + "px";
+    elmnt.style.left = newLeft + "px";
   }
 
   function closeDragElement() {
