@@ -1,0 +1,4 @@
+DB:
+  USERNAME: jrr
+  PASSWORD: admin
+  URL: jdbc:postgresql://localhost:5432/ttools

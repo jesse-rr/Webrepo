@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: TTools
+  config:
+    import:
+      - classpath:application-dev.yml
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB.USERNAME}
+    password: ${DB.PASSWORD}
+    url: ${DB.URL}
+
+server:
+  port: 8080
