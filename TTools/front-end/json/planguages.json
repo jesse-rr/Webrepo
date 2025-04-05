@@ -1,0 +1,228 @@
+{
+  "planguages": [
+    {
+      "name": "Java",
+      "year": 1995,
+      "paradigm": "Object-Oriented, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/java-icon.png"
+    },
+    {
+      "name": "Python",
+      "year": 1991,
+      "paradigm": "Multi-paradigm (OOP, Functional)",
+      "isCompiled": false,
+      "icon": "./languages/python-icon.png"
+    },
+    {
+      "name": "C",
+      "year": 1972,
+      "paradigm": "Procedural, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/c-icon.png"
+    },
+    {
+      "name": "C#",
+      "year": 2000,
+      "paradigm": "Object-Oriented, Functional, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/csharp-icon.png"
+    },
+    {
+      "name": "C++",
+      "year": 1985,
+      "paradigm": "Object-Oriented, Generic",
+      "isCompiled": true,
+      "icon": "./languages/cpp-icon.png"
+    },
+    {
+      "name": "JavaScript",
+      "year": 1995,
+      "paradigm": "Multi-paradigm (OOP, Functional)",
+      "isCompiled": false,
+      "icon": "./languages/javascript-icon.png"
+    },
+    {
+      "name": "Kotlin",
+      "year": 2011,
+      "paradigm": "Object-Oriented, Functional",
+      "isCompiled": true,
+      "icon": "./languages/kotlin-icon.png"
+    },
+    {
+      "name": "Go",
+      "year": 2009,
+      "paradigm": "Procedural, Concurrent",
+      "isCompiled": true,
+      "icon": "./languages/go-icon.png"
+    },
+    {
+      "name": "Rust",
+      "year": 2010,
+      "paradigm": "Multi-paradigm (Functional, OOP)",
+      "isCompiled": true,
+      "icon": "./languages/rust-icon.png"
+    },
+    {
+      "name": "Swift",
+      "year": 2014,
+      "paradigm": "Object-Oriented, Functional",
+      "isCompiled": true,
+      "icon": "./languages/swift-icon.png"
+    },
+    {
+      "name": "Ruby",
+      "year": 1995,
+      "paradigm": "Object-Oriented, Scripting",
+      "isCompiled": false,
+      "icon": "./languages/ruby-icon.png"
+    },
+    {
+      "name": "PHP",
+      "year": 1995,
+      "paradigm": "Procedural, OOP",
+      "isCompiled": false,
+      "icon": "./languages/php-icon.png"
+    },
+    {
+      "name": "TypeScript",
+      "year": 2012,
+      "paradigm": "Object-Oriented, Functional",
+      "isCompiled": false,
+      "icon": "./languages/typescript-icon.png"
+    },
+    {
+      "name": "Lua",
+      "year": 1993,
+      "paradigm": "Scripting, Imperative",
+      "isCompiled": false,
+      "icon": "./languages/lua-icon.png"
+    },
+    {
+      "name": "Dart",
+      "year": 2011,
+      "paradigm": "Object-Oriented, Functional",
+      "isCompiled": true,
+      "icon": "./languages/dart-icon.png"
+    },
+    {
+      "name": "Zig",
+      "year": 2016,
+      "paradigm": "Systems, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/zig-icon.png"
+    },
+    {
+      "name": "Elixir",
+      "year": 2012,
+      "paradigm": "Functional, Concurrent",
+      "isCompiled": false,
+      "icon": "./languages/elixir-icon.png"
+    },
+    {
+      "name": "Julia",
+      "year": 2012,
+      "paradigm": "Multi-paradigm (Scientific Computing)",
+      "isCompiled": false,
+      "icon": "./languages/julia-icon.png"
+    },
+    {
+      "name": "R",
+      "year": 1993,
+      "paradigm": "Statistical, Functional",
+      "isCompiled": false,
+      "icon": "./languages/r-icon.png"
+    },
+    {
+      "name": "Haskell",
+      "year": 1990,
+      "paradigm": "Purely Functional",
+      "isCompiled": true,
+      "icon": "./languages/haskell-icon.png"
+    },
+    {
+      "name": "Scala",
+      "year": 2004,
+      "paradigm": "Object-Oriented, Functional",
+      "isCompiled": true,
+      "icon": "./languages/scala-icon.png"
+    },
+    {
+      "name": "Perl",
+      "year": 1987,
+      "paradigm": "Procedural, Scripting",
+      "isCompiled": false,
+      "icon": "./languages/perl-icon.png"
+    },
+    {
+      "name": "Groovy",
+      "year": 2003,
+      "paradigm": "Object-Oriented, Scripting",
+      "isCompiled": false,
+      "icon": "./languages/groovy-icon.png"
+    },
+    {
+      "name": "COBOL",
+      "year": 1959,
+      "paradigm": "Procedural, Business-Oriented",
+      "isCompiled": true,
+      "icon": "./languages/cobol-icon.png"
+    },
+    {
+      "name": "Fortran",
+      "year": 1957,
+      "paradigm": "Procedural, Scientific",
+      "isCompiled": true,
+      "icon": "./languages/fortran-icon.png"
+    },
+    {
+      "name": "OCaml",
+      "year": 1996,
+      "paradigm": "Functional, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/ocaml-icon.png"
+    },
+    {
+      "name": "Clojure",
+      "year": 2007,
+      "paradigm": "Functional, Lisp",
+      "isCompiled": false,
+      "icon": "./languages/clojure-icon.png"
+    },
+    {
+      "name": "Erlang",
+      "year": 1986,
+      "paradigm": "Functional, Concurrent",
+      "isCompiled": true,
+      "icon": "./languages/erlang-icon.png"
+    },
+    {
+      "name": "Bash",
+      "year": 1989,
+      "paradigm": "Scripting, Imperative",
+      "isCompiled": false,
+      "icon": "./languages/bash-icon.png"
+    },
+    {
+      "name": "PowerShell",
+      "year": 2006,
+      "paradigm": "Scripting, Object-Oriented",
+      "isCompiled": false,
+      "icon": "./languages/powershell-icon.png"
+    },
+    {
+      "name": "SQL",
+      "year": 1974,
+      "paradigm": "Declarative, Query Language",
+      "isCompiled": false,
+      "icon": "./languages/sql-icon.png"
+    },
+    {
+      "name": "Assembly",
+      "year": 1949,
+      "paradigm": "Low-Level, Imperative",
+      "isCompiled": true,
+      "icon": "./languages/assembly-icon.png"
+    }
+  ]
+}

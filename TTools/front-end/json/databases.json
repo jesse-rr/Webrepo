@@ -1,0 +1,123 @@
+{
+  "databases": [
+    {
+      "name": "PostgreSQL",
+      "category": "Relational",
+      "queryLanguage": "SQL",
+      "useCase": "General-purpose, ACID compliant",
+      "icon": "./databases/postgresql-icon.png"
+    },
+    {
+      "name": "MySQL",
+      "category": "Relational",
+      "queryLanguage": "SQL",
+      "useCase": "Web apps, transactional systems",
+      "icon": "./databases/mysql-icon.png"
+    },
+    {
+      "name": "Microsoft SQL Server",
+      "category": "Relational",
+      "queryLanguage": "SQL",
+      "useCase": "Enterprise systems, Windows ecosystems",
+      "icon": "./databases/sqlserver-icon.png"
+    },
+    {
+      "name": "Oracle DB",
+      "category": "Relational",
+      "queryLanguage": "SQL",
+      "useCase": "Large-scale enterprise systems",
+      "icon": "./databases/oracle-icon.png"
+    },
+    {
+      "name": "SQLite",
+      "category": "Relational",
+      "queryLanguage": "SQL",
+      "useCase": "Embedded systems, mobile apps",
+      "icon": "./databases/sqlite-icon.png"
+    },
+    {
+      "name": "MongoDB",
+      "category": "Document",
+      "queryLanguage": "NoSQL",
+      "useCase": "JSON storage, flexible schemas",
+      "icon": "./databases/mongodb-icon.png"
+    },
+    {
+      "name": "CouchDB",
+      "category": "Document",
+      "queryLanguage": "NoSQL",
+      "useCase": "Offline-first apps, sync capabilities",
+      "icon": "./databases/couchdb-icon.png"
+    },
+    {
+      "name": "Redis",
+      "category": "Key-Value",
+      "queryLanguage": "NoSQL",
+      "useCase": "Caching, real-time systems",
+      "icon": "./databases/redis-icon.png"
+    },
+    {
+      "name": "Cassandra",
+      "category": "Wide-Column",
+      "queryLanguage": "NoSQL",
+      "useCase": "Time-series, high write throughput",
+      "icon": "./databases/cassandra-icon.png"
+    },
+    {
+      "name": "Neo4j",
+      "category": "Graph",
+      "queryLanguage": "NoSQL",
+      "useCase": "Relationship-heavy data (social networks, fraud detection)",
+      "icon": "./databases/neo4j-icon.png"
+    },
+    {
+      "name": "CockroachDB",
+      "category": "NewSQL",
+      "queryLanguage": "SQL",
+      "useCase": "Distributed SQL, cloud-native",
+      "icon": "./databases/cockroachdb-icon.png"
+    },
+    {
+      "name": "Firestore",
+      "category": "Document",
+      "queryLanguage": "NoSQL",
+      "useCase": "Serverless, real-time updates (Firebase)",
+      "icon": "./databases/firestore-icon.png"
+    },
+    {
+      "name": "DynamoDB",
+      "category": "Key-Value",
+      "queryLanguage": "NoSQL",
+      "useCase": "Serverless, AWS ecosystem",
+      "icon": "./databases/dynamodb-icon.png"
+    },
+    {
+      "name": "InfluxDB",
+      "category": "Time-Series",
+      "queryLanguage": "NoSQL",
+      "useCase": "Metrics, IoT data",
+      "icon": "./databases/influxdb-icon.png"
+    },
+    {
+      "name": "TimescaleDB",
+      "category": "Time-Series",
+      "queryLanguage": "SQL",
+      "useCase": "PostgreSQL extension for time-series",
+      "icon": "./databases/timescale-icon.png"
+    },
+    {
+      "name": "Elasticsearch",
+      "category": "Search",
+      "queryLanguage": "NoSQL",
+      "useCase": "Full-text search, log analytics",
+      "icon": "./databases/elasticsearch-icon.png"
+    },
+    {
+      "name": "Apache Solr",
+      "category": "Search",
+      "queryLanguage": "NoSQL",
+      "useCase": "Text-heavy search applications",
+      "icon": "./databases/solr-icon.png"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "sudoplanguages": [
+    {
+      "name": "HTML",
+      "fullName": "HyperText Markup Language",
+      "year": 1993,
+      "category": "Markup",
+      "description": "Structure web content",
+      "icon": "./markup/html-icon.png"
+    },
+    {
+      "name": "XML",
+      "fullName": "eXtensible Markup Language",
+      "year": 1998,
+      "category": "Markup",
+      "description": "Data representation and exchange",
+      "icon": "./markup/xml-icon.png"
+    },
+    {
+      "name": "Markdown",
+      "fullName": "Lightweight Markup",
+      "year": 2004,
+      "category": "Markup",
+      "description": "Formatted text documentation",
+      "icon": "./markup/markdown-icon.png"
+    },
+    {
+      "name": "CSS",
+      "fullName": "Cascading Style Sheets",
+      "year": 1996,
+      "category": "Stylesheet",
+      "description": "Web page styling",
+      "icon": "./markup/css-icon.png"
+    },
+    {
+      "name": "SASS",
+      "fullName": "Syntactically Awesome Stylesheets",
+      "year": 2006,
+      "category": "Stylesheet",
+      "description": "CSS preprocessor",
+      "icon": "./markup/sass-icon.png"
+    },
+    {
+      "name": "SCSS",
+      "fullName": "Sassy CSS",
+      "year": 2006,
+      "category": "Stylesheet",
+      "description": "CSS superset with nesting",
+      "icon": "./markup/scss-icon.png"
+    },
+    {
+      "name": "GQL",
+      "fullName": "Graph Query Language",
+      "year": 2020,
+      "category": "Query",
+      "description": "Graph database queries (Neo4j)",
+      "icon": "./markup/gql-icon.png"
+    },
+    {
+      "name": "CQL",
+      "fullName": "Cassandra Query Language",
+      "year": 2010,
+      "category": "Query",
+      "description": "Apache Cassandra queries",
+      "icon": "./markup/cql-icon.png"
+    },
+    {
+      "name": "JSON",
+      "fullName": "JavaScript Object Notation",
+      "year": 2001,
+      "category": "Data",
+      "description": "Lightweight data interchange",
+      "icon": "./markup/json-icon.png"
+    },
+    {
+      "name": "YAML",
+      "fullName": "YAML Ain't Markup Language",
+      "year": 2001,
+      "category": "Data",
+      "description": "Human-readable configuration",
+      "icon": "./markup/yaml-icon.png"
+    },
+    {
+      "name": "TOML",
+      "fullName": "Tom's Obvious Minimal Language",
+      "year": 2013,
+      "category": "Data",
+      "description": "Configuration files",
+      "icon": "./markup/toml-icon.png"
+    },
+    {
+      "name": "JSX",
+      "fullName": "JavaScript XML",
+      "year": 2013,
+      "category": "Templating",
+      "description": "React component markup",
+      "icon": "./markup/jsx-icon.png"
+    },
+    {
+      "name": "HTMX",
+      "fullName": "Hypertext Markup eXtensions",
+      "year": 2020,
+      "category": "Templating",
+      "description": "Modern HTML extensions",
+      "icon": "./markup/htmx-icon.png"
+    },
+    {
+      "name": "Regex",
+      "fullName": "Regular Expressions",
+      "year": 1951,
+      "category": "Pattern",
+      "description": "Text pattern matching",
+      "icon": "./markup/regex-icon.png"
+    },
+    {
+      "name": "Bash",
+      "fullName": "Bourne-Again Shell",
+      "year": 1989,
+      "category": "Scripting",
+      "description": "Unix shell scripting",
+      "icon": "./markup/bash-icon.png"
+    },
+    {
+      "name": "Dockerfile",
+      "fullName": "Docker Configuration",
+      "year": 2013,
+      "category": "Config",
+      "description": "Container build instructions",
+      "icon": "./markup/dockerfile-icon.png"
+    }
+  ]
+}

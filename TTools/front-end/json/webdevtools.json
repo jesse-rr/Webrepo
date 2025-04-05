@@ -1,0 +1,193 @@
+{
+  "webdevtools": [
+    {
+      "name": "Git",
+      "category": "Version Control",
+      "purpose": "Code collaboration/history",
+      "compatibleWith": [],
+      "icon": "./tools/git-icon.png"
+    },
+    {
+      "name": "npm",
+      "category": "Package Manager",
+      "purpose": "JavaScript dependencies",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/npm-icon.png"
+    },
+    {
+      "name": "Yarn",
+      "category": "Package Manager",
+      "purpose": "Faster JS dependency management",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/yarn-icon.png"
+    },
+    {
+      "name": "pip",
+      "category": "Package Manager",
+      "purpose": "Python libraries",
+      "compatibleWith": ["PYTHON"],
+      "icon": "./tools/pip-icon.png"
+    },
+    {
+      "name": "Maven",
+      "category": "Package Manager",
+      "purpose": "Java dependencies",
+      "compatibleWith": ["JAVA", "KOTLIN", "SCALA"],
+      "icon": "./tools/maven-icon.png"
+    },
+    {
+      "name": "Webpack",
+      "category": "Bundler",
+      "purpose": "Bundle JS/CSS/assets",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/webpack-icon.png"
+    },
+    {
+      "name": "Vite",
+      "category": "Bundler",
+      "purpose": "Ultra-fast modern bundler",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/vite-icon.png"
+    },
+    {
+      "name": "Gradle",
+      "category": "Build Tool",
+      "purpose": "Java/Kotlin project builds",
+      "compatibleWith": ["JAVA", "KOTLIN", "GROOVY"],
+      "icon": "./tools/gradle-icon.png"
+    },
+    {
+      "name": "Docker",
+      "category": "Containerization",
+      "purpose": "Package apps in containers",
+      "compatibleWith": [],
+      "icon": "./tools/docker-icon.png"
+    },
+    {
+      "name": "Kubernetes",
+      "category": "Orchestration",
+      "purpose": "Manage containerized apps",
+      "compatibleWith": [],
+      "icon": "./tools/kubernetes-icon.png"
+    },
+    {
+      "name": "Vercel",
+      "category": "Hosting",
+      "purpose": "Frontend deployment",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/vercel-icon.png"
+    },
+    {
+      "name": "Netlify",
+      "category": "Hosting",
+      "purpose": "Static site deployment",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/netlify-icon.png"
+    },
+    {
+      "name": "Jest",
+      "category": "Testing",
+      "purpose": "JavaScript unit tests",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/jest-icon.png"
+    },
+    {
+      "name": "Cypress",
+      "category": "Testing",
+      "purpose": "E2E web testing",
+      "compatibleWith": [],
+      "icon": "./tools/cypress-icon.png"
+    },
+    {
+      "name": "Postman",
+      "category": "API Testing",
+      "purpose": "API development/testing",
+      "compatibleWith": [],
+      "icon": "./tools/postman-icon.png"
+    },
+    {
+      "name": "Figma",
+      "category": "Design",
+      "purpose": "UI/UX prototyping",
+      "compatibleWith": [],
+      "icon": "./tools/figma-icon.png"
+    },
+    {
+      "name": "Adobe XD",
+      "category": "Design",
+      "purpose": "Interactive prototypes",
+      "compatibleWith": [],
+      "icon": "./tools/adobe-xd-icon.png"
+    },
+    {
+      "name": "Storybook",
+      "category": "Component Library",
+      "purpose": "UI component isolation",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/storybook-icon.png"
+    },
+    {
+      "name": "Lighthouse",
+      "category": "Auditing",
+      "purpose": "Website performance metrics",
+      "compatibleWith": [],
+      "icon": "./tools/lighthouse-icon.png"
+    },
+    {
+      "name": "PageSpeed Insights",
+      "category": "Optimization",
+      "purpose": "Google's performance tool",
+      "compatibleWith": [],
+      "icon": "./tools/pagespeed-icon.png"
+    },
+    {
+      "name": "WordPress",
+      "category": "CMS",
+      "purpose": "Content management",
+      "compatibleWith": ["PHP"],
+      "icon": "./tools/wordpress-icon.png"
+    },
+    {
+      "name": "Strapi",
+      "category": "Headless CMS",
+      "purpose": "API-first content",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/strapi-icon.png"
+    },
+    {
+      "name": "Sanity",
+      "category": "Headless CMS",
+      "purpose": "Structured content",
+      "compatibleWith": ["JAVASCRIPT", "TYPESCRIPT"],
+      "icon": "./tools/sanity-icon.png"
+    },
+    {
+      "name": "Google Analytics",
+      "category": "Analytics",
+      "purpose": "User tracking",
+      "compatibleWith": [],
+      "icon": "./tools/google-analytics-icon.png"
+    },
+    {
+      "name": "Hotjar",
+      "category": "Analytics",
+      "purpose": "Heatmaps/session recordings",
+      "compatibleWith": [],
+      "icon": "./tools/hotjar-icon.png"
+    },
+    {
+      "name": "SonarQube",
+      "category": "Code Quality",
+      "purpose": "Security/technical debt",
+      "compatibleWith": [],
+      "icon": "./tools/sonarqube-icon.png"
+    },
+    {
+      "name": "Snyk",
+      "category": "Security",
+      "purpose": "Dependency vulnerability scanning",
+      "compatibleWith": [],
+      "icon": "./tools/snyk-icon.png"
+    }
+  ]
+}

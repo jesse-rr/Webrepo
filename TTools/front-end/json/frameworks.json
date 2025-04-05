@@ -1,0 +1,130 @@
+{
+  "frameworks": [
+    {
+      "name": "Spring Boot",
+      "languages": ["JAVA", "KOTLIN"],
+      "type": "Backend",
+      "year": 2014
+    },
+    {
+      "name": "Django",
+      "languages": ["PYTHON"],
+      "type": "Backend",
+      "year": 2005
+    },
+    {
+      "name": "Express.js",
+      "languages": ["JAVASCRIPT", "TYPESCRIPT"],
+      "type": "Backend",
+      "year": 2010
+    },
+    {
+      "name": "Laravel",
+      "languages": ["PHP"],
+      "type": "Backend",
+      "year": 2011
+    },
+    {
+      "name": "Ruby on Rails",
+      "languages": ["RUBY"],
+      "type": "Backend",
+      "year": 2005
+    },
+    {
+      "name": "ASP.NET Core",
+      "languages": ["C_SHARP"],
+      "type": "Backend",
+      "year": 2016
+    },
+    {
+      "name": "FastAPI",
+      "languages": ["PYTHON"],
+      "type": "Backend",
+      "year": 2018
+    },
+    {
+      "name": "NestJS",
+      "languages": ["TYPESCRIPT"],
+      "type": "Backend",
+      "year": 2017
+    },
+    {
+      "name": "Gin",
+      "languages": ["GO"],
+      "type": "Backend",
+      "year": 2014
+    },
+    {
+      "name": "Actix",
+      "languages": ["RUST"],
+      "type": "Backend",
+      "year": 2018
+    },
+    {
+      "name": "React",
+      "languages": ["JAVESCRIPT", "TYPESCRIPT"],
+      "type": "Frontend",
+      "year": 2013
+    },
+    {
+      "name": "Angular",
+      "languages": ["TYPESCRIPT"],
+      "type": "Frontend",
+      "year": 2016
+    },
+    {
+      "name": "Vue.js",
+      "languages": ["JAVESCRIPT"],
+      "type": "Frontend",
+      "year": 2014
+    },
+    {
+      "name": "Svelte",
+      "languages": ["JAVESCRIPT"],
+      "type": "Frontend",
+      "year": 2016
+    },
+    {
+      "name": "Next.js",
+      "languages": ["JAVESCRIPT", "TYPESCRIPT"],
+      "type": "Frontend (SSR)",
+      "year": 2016
+    },
+    {
+      "name": "Nuxt.js",
+      "languages": ["JAVESCRIPT"],
+      "type": "Frontend (SSR)",
+      "year": 2016
+    },
+    {
+      "name": "Node.js",
+      "languages": ["JAVESCRIPT"],
+      "type": "Backend/Runtime",
+      "year": 2009
+    },
+    {
+      "name": "Deno",
+      "languages": ["TYPESCRIPT"],
+      "type": "Backend/Runtime",
+      "year": 2020
+    },
+    {
+      "name": "Remix",
+      "languages": ["TYPESCRIPT"],
+      "type": "Full-Stack",
+      "year": 2021
+    },
+    {
+      "name": "SvelteKit",
+      "languages": ["JAVESCRIPT"],
+      "type": "Full-Stack",
+      "year": 2021
+    },
+    {
+      "name": "Astro",
+      "languages": ["JAVESCRIPT"],
+      "type": "Frontend/SSG",
+      "year": 2021
+    }
+  ]
+}
