@@ -1,0 +1,9 @@
+deb:
+  db:
+    username: jrr
+    password: admin
+    url: jdbc:postgresql://localhost:5432/event_write
+
+ENCRYPTION:
+  KEY: 4vyb965UNCQRpXY8BkZ6iX5oIWvAPl6Bm2tLtHFwtfs=
+  SALT: 56867c16e87a7b38187e208c3e292b8a586eb80c8e0d61ad376e3d1ade26ed28
