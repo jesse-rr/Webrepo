@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+:root {
+  --color-1: #1E201E;
+  --color-2: #3C3D37;
+  --color-3: #697565;
+  --color-4: #ECDFCC;
+
+  --font-1: "Oswald", sans-serif;
+  --font-2: Arial, Helvetica, sans-serif
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-1);
+  color: var(--color-4);
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+}
+.main {
+  display: flex;
+  background-color: var(--color-2);
+  height: 100%;
+}
+.aside {
+  width: 300px;
+  height: 100%;
+}
+.editor {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-1);
+}
+.editor-nums {
+  border: thin solid var(--color-4);
+  border-top: 0px;
+}
+.editor-nums *{
+  text-align: center;
+  padding: 3px 0;
+  margin: 0 6px;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(245, 245, 220, 0.238);
+}
+
+
+.header {
+  background-color: var(--color-2);
+  border-bottom: 1px solid var(--color-4);
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0 5px;
+}
+.nav a{
+  padding: 5px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.15em;
+  transition: all ease-in-out .2s;
+}
+.nav a:hover {
+  background-color: var(--color-1);
+}
+
+.nav div {
+  display: flex;
+  gap: 10px;
+  font-size: 1.67em;
+}
