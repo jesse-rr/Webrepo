@@ -3,6 +3,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAmount;
@@ -19,6 +20,7 @@ public class DataUnload {
     private static List<String> countries = readFile("country.txt");
     private static List<String> verbs = readFile("verbs.txt");
     private static final Map<String, String> phones = loadPhoneFormats("phone.txt");
+    private static final Map<String, String> postals = loadPhoneFormats("cep.txt");
     private static final List<Currency> currencies = new ArrayList<>(Currency.getAvailableCurrencies());
 
     private static List<String> readFile(String filename) {
@@ -119,16 +121,34 @@ public class DataUnload {
         return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public class Date {
+    public class date {
         public static LocalDateTime past() {
             LocalDateTime now = LocalDateTime.now();
             return LocalDateTime.from(now.minusDays(random.nextInt(1, 365)).atZone(ZoneId.systemDefault()));
         }
+
         public static LocalDateTime future() {
             return LocalDateTime.now().plusDays(random.nextInt(1, 365));
         }
+
         public static LocalDateTime between(LocalDateTime min, LocalDateTime max) {
-            return 
+            return Instant.ofEpochMilli(min.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() + (long) (random.nextDouble() * (max.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - min.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())))
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDateTime();
+        }
+    }
+
+    public class postal {
+        static List<String> values = new ArrayList<>(postals.values());
+        public static String format() {
+            return getRandomParam(values);
+        }
+        public static String value() {
+            String format = format();
+            for (int i = 0; i < format.length(); i++) {
+                format.replace('X', (char) random.nextInt());
+            }
+            return format;
         }
     }
 
@@ -143,10 +163,15 @@ public class DataUnload {
         System.out.println(street());
         System.out.println(country());
         System.out.println(iso());
-        System.out.println(phone());
-        System.out.println(phone("BR"));
+//        System.out.println(phone());
+//        System.out.println(phone("BR")); // TODO FIX
         System.out.println(currency());
         System.out.println(price());
         System.out.println(price(12.00, 30.12));
+        System.out.println(date.past());
+        System.out.println(date.future());
+        System.out.println(DataUnload.date.between(date.past(), date.future()));
+        System.out.println(postal.format());
+        System.out.println(postal.value());
     }
 }
