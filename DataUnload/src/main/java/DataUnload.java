@@ -1,177 +1,175 @@
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.TemporalAmount;
+import java.time.*;
 import java.util.*;
+import java.util.Locale.IsoCountryCode;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class DataUnload {
-    private static final Random random = new Random();
+public final class DataUnload {
+    private static final ThreadLocalRandom RANDOM = ThreadLocalRandom.current();
+    private static final ZoneId ZONE_ID = ZoneId.systemDefault();
 
-    private static List<String> firstNames = readFile("firstname.txt");
-    private static List<String> lastNames = readFile("lastname.txt");
-    private static List<String> emailProviders = readFile("email_providers.txt");
-    private static List<String> streets = readFile("street.txt");
-    private static List<String> countries = readFile("country.txt");
-    private static List<String> verbs = readFile("verbs.txt");
-    private static final Map<String, String> phones = loadPhoneFormats("phone.txt");
-    private static final Map<String, String> postals = loadPhoneFormats("cep.txt");
-    private static final List<Currency> currencies = new ArrayList<>(Currency.getAvailableCurrencies());
+    private static final List<String> FIRST_NAMES = readFile("firstname.txt");
+    private static final List<String> LAST_NAMES = readFile("lastname.txt");
+    private static final List<String> GENRES = List.of("Male", "Female", "Other", "Undefined");
+    private static final List<String> EMAIL_PROVIDERS = readFile("email_provider.txt");
+    private static final List<String> STREETS = readFile("street.txt");
+    private static final List<String> CITIES = readFile("city.txt");
+    private static final List<String> VERBS = readFile("verb.txt");
+    private static final Map<String, String> PHONES = loadIntoMap("iso_phone.txt");
+    private static final String[][] PUBLIC_IPS = {
+            {"1.0.0.0", "9.255.255.255"},
+            {"11.0.0.0", "172.15.255.255"},
+            {"172.32.0.0", "192.167.255.255"},
+            {"192.169.0.0", "223.255.255.255"}
+    };
+    private static final String[] TIME_ZONES = TimeZone.getAvailableIDs();
+    private static final List<Currency> CURRENCIES = List.copyOf(Currency.getAvailableCurrencies());
+    private static final String[] COUNTRY_CODES = Locale.getISOCountries();
+    private static final String[] ALL_COUNTRY_NAMES = Arrays.stream(COUNTRY_CODES)
+            .map(code -> new Locale("", code).getDisplayCountry(Locale.ENGLISH))
+            .toArray(String[]::new);
 
+    private DataUnload() {
+        throw new AssertionError("Cannot instantiate static utility class");
+    }
+
+    // ===== NAME GENERATORS =====
+    public static String firstName() {
+        return FIRST_NAMES.get(RANDOM.nextInt(FIRST_NAMES.size()));
+    }
+
+    public static String lastName() {
+        return LAST_NAMES.get(RANDOM.nextInt(LAST_NAMES.size()));
+    }
+
+    public static String fullName() {
+        return firstName() + " " + lastName();
+    }
+
+    public static String genre() {
+        return GENRES.get(RANDOM.nextInt(GENRES.size()));
+    }
+
+    // ===== ADDRESS GENERATORS =====
+    public static String street() {
+        String street = STREETS.get(RANDOM.nextInt(STREETS.size()));
+        return Character.toUpperCase(street.charAt(0)) + street.substring(1).toLowerCase();
+    }
+
+    public static String city() {
+        return CITIES.get(RANDOM.nextInt(CITIES.size()));
+    }
+
+    public static String country() {
+        return ALL_COUNTRY_NAMES[RANDOM.nextInt(ALL_COUNTRY_NAMES.length)];
+    }
+
+    public static String iso() {
+        return COUNTRY_CODES[RANDOM.nextInt(COUNTRY_CODES.length)];
+    }
+
+    public static String timeZone() {
+        return TIME_ZONES[RANDOM.nextInt(TIME_ZONES.length)];
+    }
+
+    // ===== PHONE GENERATORS =====
+    public static String phone() {
+        return phone(new ArrayList<>(PHONES.keySet()).get(RANDOM.nextInt(PHONES.size())));
+    }
+
+    public static String phone(String iso) {
+        String format = PHONES.get(iso);
+        if (format == null) throw new IllegalArgumentException("No phone format for ISO: " + iso);
+        return generateFromFormat(format, 'X');
+    }
+
+    // ===== DATE/TIME GENERATORS =====
+    public static LocalDateTime past() {
+        return LocalDateTime.now().minusDays(RANDOM.nextInt(365));
+    }
+
+    public static LocalDateTime future() {
+        return LocalDateTime.now().plusDays(RANDOM.nextInt(365));
+    }
+
+    public static LocalDateTime between(LocalDateTime start, LocalDateTime end) {
+        long startEpoch = start.atZone(ZONE_ID).toInstant().toEpochMilli();
+        long endEpoch = end.atZone(ZONE_ID).toInstant().toEpochMilli();
+        long randomEpoch = startEpoch + (long) (RANDOM.nextDouble() * (endEpoch - startEpoch));
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(randomEpoch), ZONE_ID);
+    }
+
+    // ===== INTERNET GENERATORS =====
+    public static String email() {
+        return (firstName().toLowerCase() + lastName().toLowerCase() +
+                "@" + EMAIL_PROVIDERS.get(RANDOM.nextInt(EMAIL_PROVIDERS.size())))
+                .replaceAll("\\s+", "");
+    }
+
+    public static String domain() {
+        return VERBS.get(RANDOM.nextInt(VERBS.size())) +
+                VERBS.get(RANDOM.nextInt(VERBS.size())) + ".com";
+    }
+
+    public static String url() {
+        return (RANDOM.nextBoolean() ? "https://" : "http://") + domain();
+    }
+
+    public static String ip() {
+        String[] range = PUBLIC_IPS[RANDOM.nextInt(PUBLIC_IPS.length)];
+        return generateIpInRange(range[0], range[1]);
+    }
+
+    // ===== PRICE GENERATORS =====
+    public static double price() {
+        return 0.99 + RANDOM.nextDouble(1000);
+    }
+
+    public static String currency() {
+        return CURRENCIES.get(RANDOM.nextInt(CURRENCIES.size())).getCurrencyCode();
+    }
+
+    // ===== HELPER METHODS =====
+    private static String generateFromFormat(String format, char placeholder) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : format.toCharArray()) {
+            sb.append(c == placeholder ? RANDOM.nextInt(10) : c);
+        }
+        return sb.toString();
+    }
+
+    private static String generateIpInRange(String range1, String range2) {
+        int[] start = Arrays.stream(range1.split("\\.")).mapToInt(Integer::parseInt).toArray();
+        int[] end = Arrays.stream(range2.split("\\.")).mapToInt(Integer::parseInt).toArray();
+        return RANDOM.nextInt(start[0], end[0] + 1) + "." +
+                RANDOM.nextInt(start[1], end[1] + 1) + "." +
+                RANDOM.nextInt(start[2], end[2] + 1) + "." +
+                RANDOM.nextInt(start[3], end[3] + 1);
+    }
+
+    // ===== FILE LOADING =====
     private static List<String> readFile(String filename) {
         try {
-            return Files.readAllLines(Paths.get("src/main/java/" + filename));
+            return Files.readAllLines(Paths.get("src/main/java/data/" + filename));
         } catch (IOException e) {
             throw new RuntimeException("Failed to read file: " + filename, e);
         }
     }
 
-    private static Map<String, String> loadPhoneFormats(String path) {
+    private static Map<String, String> loadIntoMap(String path) {
         try {
-            return Files.readAllLines(Paths.get("src/main/java/" + path))
+            return Files.readAllLines(Paths.get("src/main/java/data/" + path))
                     .stream()
-                    .filter(line -> !line.isEmpty() && line.contains("|"))
+                    .filter(line -> !line.isEmpty() && line.contains(":"))
                     .collect(Collectors.toMap(
-                            line -> line.split("\\|")[0],
-                            line -> line.split("\\|")[1]
+                            line -> line.split(":")[0],
+                            line -> line.split(":")[1]
                     ));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load phone formats", e);
         }
-    }
-
-    private static String getRandomParam(List<String> params) {
-        if (params == null || params.isEmpty()) {
-            throw new RuntimeException("Parameter list is empty!");
-        }
-        return params.get(random.nextInt(params.size()));
-    }
-
-    public static String firstname() {
-        return getRandomParam(firstNames);
-    }
-
-    public static String lastname() {
-        return getRandomParam(lastNames);
-    }
-
-    public static String fullName() {
-        return firstname() + " " + lastname();
-    }
-
-    public static String email() {
-        return (firstname().toLowerCase() + lastname().toLowerCase() + "@" + getRandomParam(emailProviders)).replaceAll("\\s+", "");
-    }
-
-    public static String domain() {
-        return "www." + getRandomParam(verbs)+getRandomParam(verbs) + ".com";
-    }
-
-    public static String url() {
-        String[] protocols = {"http://", "https://"};
-        return protocols[random.nextInt(protocols.length)] + domain();
-    }
-
-    public static String street() {
-        String street = getRandomParam(streets);
-        return street.toUpperCase().charAt(0) + street.substring(1).toLowerCase();
-    }
-
-    public static String country() {
-        return getRandomParam(countries);
-    }
-
-    public static String iso() {
-        List<String> keys = new ArrayList<>(phones.keySet());
-        return keys.get(random.nextInt(keys.size()));
-    }
-
-    // TODO its hard
-    public static String phone() {
-        List<String> phoneFormats = new ArrayList<>(phones.values());
-        return getRandomParam(phoneFormats);
-    }
-
-    public static String phone(String iso) {
-        if (!phones.containsKey(iso)) {
-            throw new IllegalArgumentException("No phone format found for ISO code: " + iso);
-        }
-        return phones.get(iso);
-    }
-
-    public static String currency() {
-        return currencies.get(random.nextInt(currencies.size())).getCurrencyCode();
-    }
-
-    public static BigDecimal price() {
-        double value = 0.01 + (1000 - 0.01) * random.nextDouble();
-        return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public static BigDecimal price(double min, double max) {
-        if (min >= max) {
-            throw new IllegalArgumentException("Max must be greater than min");
-        }
-        double value = min + (max - min) * random.nextDouble();
-        return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public class date {
-        public static LocalDateTime past() {
-            LocalDateTime now = LocalDateTime.now();
-            return LocalDateTime.from(now.minusDays(random.nextInt(1, 365)).atZone(ZoneId.systemDefault()));
-        }
-
-        public static LocalDateTime future() {
-            return LocalDateTime.now().plusDays(random.nextInt(1, 365));
-        }
-
-        public static LocalDateTime between(LocalDateTime min, LocalDateTime max) {
-            return Instant.ofEpochMilli(min.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() + (long) (random.nextDouble() * (max.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - min.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())))
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDateTime();
-        }
-    }
-
-    public class postal {
-        static List<String> values = new ArrayList<>(postals.values());
-        public static String format() {
-            return getRandomParam(values);
-        }
-        public static String value() {
-            String format = format();
-            for (int i = 0; i < format.length(); i++) {
-                format.replace('X', (char) random.nextInt());
-            }
-            return format;
-        }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(firstname());
-        System.out.println(lastname());
-        System.out.println(fullName());
-        System.out.println(email());
-        System.out.println(phone());
-        System.out.println(domain());
-        System.out.println(url());
-        System.out.println(street());
-        System.out.println(country());
-        System.out.println(iso());
-//        System.out.println(phone());
-//        System.out.println(phone("BR")); // TODO FIX
-        System.out.println(currency());
-        System.out.println(price());
-        System.out.println(price(12.00, 30.12));
-        System.out.println(date.past());
-        System.out.println(date.future());
-        System.out.println(DataUnload.date.between(date.past(), date.future()));
-        System.out.println(postal.format());
-        System.out.println(postal.value());
     }
 }
