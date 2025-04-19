@@ -3,7 +3,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.*;
 import java.util.*;
-import java.util.Locale.IsoCountryCode;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,7 @@ public final class DataUnload {
     private static final List<String> CITIES = readFile("city.txt");
     private static final List<String> VERBS = readFile("verb.txt");
     private static final Map<String, String> PHONES = loadIntoMap("iso_phone.txt");
+    private static final Map<String, String> POSTAL = loadIntoMap("iso_postal.txt");
     private static final String[][] PUBLIC_IPS = {
             {"1.0.0.0", "9.255.255.255"},
             {"11.0.0.0", "172.15.255.255"},
@@ -53,6 +53,20 @@ public final class DataUnload {
         return GENRES.get(RANDOM.nextInt(GENRES.size()));
     }
 
+    public static int age(int min, int max) {
+        return RANDOM.nextInt(min, max);
+    }
+
+    public static int age(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    public static LocalDate birthDate() {
+        return LocalDate.now().minusYears(RANDOM.nextInt(100))
+                .minusMonths(RANDOM.nextInt(12))
+                .minusDays(RANDOM.nextInt(28));
+    }
+
     // ===== ADDRESS GENERATORS =====
     public static String street() {
         String street = STREETS.get(RANDOM.nextInt(STREETS.size()));
@@ -73,6 +87,19 @@ public final class DataUnload {
 
     public static String timeZone() {
         return TIME_ZONES[RANDOM.nextInt(TIME_ZONES.length)];
+    }
+
+    public static String postal() {
+        String iso = COUNTRY_CODES[RANDOM.nextInt(COUNTRY_CODES.length)];
+        return generateFromFormat(POSTAL.get(iso), iso);
+    }
+
+    public static String postal(String iso) {
+        String format = POSTAL.get(iso.toUpperCase());
+        if (format == null) {
+            throw new IllegalArgumentException("No postal format for ISO: " + iso);
+        }
+        return generateFromFormat(format, iso);
     }
 
     // ===== PHONE GENERATORS =====
@@ -118,6 +145,7 @@ public final class DataUnload {
         return (RANDOM.nextBoolean() ? "https://" : "http://") + domain();
     }
 
+    // DOES NOT GENERATE PRIVATE IPS
     public static String ip() {
         String[] range = PUBLIC_IPS[RANDOM.nextInt(PUBLIC_IPS.length)];
         return generateIpInRange(range[0], range[1]);
@@ -132,11 +160,43 @@ public final class DataUnload {
         return CURRENCIES.get(RANDOM.nextInt(CURRENCIES.size())).getCurrencyCode();
     }
 
+    public static String credit_card() {
+        return generateFromFormat("XXXX-XXXX-XXXX-XXXX", 'X');
+    }
+
     // ===== HELPER METHODS =====
     private static String generateFromFormat(String format, char placeholder) {
         StringBuilder sb = new StringBuilder();
         for (char c : format.toCharArray()) {
             sb.append(c == placeholder ? RANDOM.nextInt(10) : c);
+        }
+        return sb.toString();
+    }
+
+    private static String generateFromFormat(String format, String iso) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < format.length(); i++) {
+            char c = format.charAt(i);
+            switch (c) {
+                case 'N':
+                    sb.append(RANDOM.nextInt(10));
+                    break;
+                case 'A':
+                    sb.append((char) ('A' + RANDOM.nextInt(26)));
+                    break;
+                case '?':
+                    sb.append(RANDOM.nextBoolean() ? (char) ('A' + RANDOM.nextInt(26)) : RANDOM.nextInt(10));
+                    break;
+                case 'C':
+                    if (i + 1 < format.length() && format.charAt(i + 1) == 'C') {
+                        sb.append(iso);
+                        i++;
+                    } else { sb.append(c); }
+                    break;
+                default:
+                    sb.append(c);
+                    break;
+            }
         }
         return sb.toString();
     }
