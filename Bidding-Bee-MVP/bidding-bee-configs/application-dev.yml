@@ -1,0 +1,8 @@
+db:
+  username: jrr
+  password: admin
+  url: jdbc:postgresql://localhost:5432/userbb
+
+smtp:
+  username: jessericardorogerio@gmail.com
+  password: nwfc ubui lmms mkwk
