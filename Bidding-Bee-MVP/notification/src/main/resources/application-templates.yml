@@ -1,0 +1,4 @@
+templates:
+  email_verification:
+    subject:
+    body:

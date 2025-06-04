@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: config-server
+  config:
+    import: optional:application-dev.yml
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_URI}
+          clone-on-start: true
+          username: ${GIT_USERNAME}
+          password: ${GIT_PASSWORD}
+
+server:
+  port: 8888
