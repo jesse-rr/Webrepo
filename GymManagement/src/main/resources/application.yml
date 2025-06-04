@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: gym-management
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database: postgresql
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${db_url}
+    password: ${db_passwd}
+    username: ${db_username}
+    name: ${db_name}
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    password: ${smtp.passwd}
+    username: ${smtp.username}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
+    port: 587
+    test-connection: true
+
+server:
+  port: 8080

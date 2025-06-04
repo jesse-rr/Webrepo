@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: whatsapp
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: whatsapp
+      uri: mongodb://localhost:27017/whatsapp
+
+server:
+  port: 8080
