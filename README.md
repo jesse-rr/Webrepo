@@ -30,7 +30,7 @@ docker run --cap-add=IPC_LOCK -d --name=dev-vault -p 8200:8200 hashicorp/vault s
 O Vault estará disponível em http://localhost:8200. Você pode ver o token de root (para desenvolvimento) na saída do comando anterior ou com:
 
 ```bash
-docker logs learn-vault | grep "Root Token:"
+docker logs dev-vault | grep "Root Token:"
 ```
 
 Copie o token que aparece após `Root Token:`.
@@ -41,7 +41,7 @@ Vamos usar a CLI do Vault dentro do contêiner para armazenar nossa chave API:
 
 ```bash
 # Acessar o shell do contêiner
-docker exec -it learn-vault /bin/sh
+docker exec -it dev-vault /bin/sh
 
 # Configurar variável de ambiente com o token
 export VAULT_ADDR='http://127.0.0.1:8200'
