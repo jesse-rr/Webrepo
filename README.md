@@ -78,35 +78,11 @@ Anote o token gerado - este será usado pela aplicação.
 
 ### 6. Simular uma aplicação acessando o segredo
 
-Vamos criar um script Python simples que acessa o Vault para obter a chave API:
+Vamos utilizar o curl para simular um request de outra aplicação.
 
 ```bash
-# Instalar bibliotecas necessárias (fora do contêiner)
-pip install hvac requests
-```
-
-Crie um arquivo `app.py` com:
-
-```python
-import hvac
-
-# Configurar cliente Vault
-client = hvac.Client(
-    url='http://localhost:8200',
-    token='token-com-permissao-limiteda-aqui'  # Use o token criado no passo 5
-)
-
-# Ler a chave API
-read_response = client.secrets.kv.read_secret_version(path='api-keys/producao')
-api_key = read_response['data']['data']['key']
-
-print(f"A aplicação obteve a chave API: {api_key[:5]}... (restante oculto por segurança)")
-```
-
-Execute o script:
-
-```bash
-python app.py
+# Fora do container, no host Linux:
+curl -s --header "X-Vault-Token: token-com-permissao-limiteda-aqui" http://localhost:8200/v1/secret/data/api-keys/producao | grep -o '"key": "[^"]*' | awk -F'"' '{print $4}'
 ```
 
 ## Síntese dos Resultados
