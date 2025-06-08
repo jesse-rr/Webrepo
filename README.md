@@ -45,9 +45,9 @@ docker exec -it dev-vault /bin/sh
 
 # Configurar variável de ambiente com o token
 export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_TOKEN='seu-root-token-aqui'
+export VAULT_TOKEN='PLACEHOLDER'
 
-# Armazenar uma chave API secreta
+# Armazenar uma chave API secreta (ex: a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6")
 vault kv put secret/api-keys/producao key="a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"
 ```
 
@@ -82,7 +82,7 @@ Vamos utilizar o curl para simular um request de outra aplicação.
 
 ```bash
 # Fora do container, no host Linux:
-curl -s --header "X-Vault-Token: token-com-permissao-limiteda-aqui" http://localhost:8200/v1/secret/data/api-keys/producao | grep -o '"key": "[^"]*' | awk -F'"' '{print $4}'
+curl -s --header "X-Vault-Token: PLACEHOLDER" http://localhost:8200/v1/secret/data/api-keys/producao
 ```
 
 ## Síntese dos Resultados
