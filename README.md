@@ -34,7 +34,7 @@ docker logs dev-vault | grep "Root Token:"
 ```
 
 Copie o token que aparece após `Root Token:`.
-<div style="text-align: center">![image](https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377)</div>
+<img style="text-align: center" src="https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377">
 
 
 ### 3. Armazenar uma chave API no Vault
