@@ -33,8 +33,12 @@ O Vault estará disponível em http://localhost:8200. Você pode ver o token de 
 # Copie o token que aparece após `Root Token:`.
 docker logs dev-vault | grep "Root Token:"
 ```
-
-<img style="text-align: center" src="https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377">
+<details>
+  <summary>Imagem Guia</summary>
+  
+  ![image](https://github.com/user-attachments/assets/60337150-92e0-41f7-b734-e1e98daa91ba)
+  ![image](https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377)
+</details>
 
 
 ### 3. Armazenar uma chave API no Vault
