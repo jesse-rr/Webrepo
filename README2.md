@@ -7,20 +7,17 @@ _OBS: O sistema foi desenvolvido em Java, utilizando estruturas de dados customi
 A ListaSequencial foi a estrutura unica e principal neste projeto devido às seguintes características:
 
 Inserção (adiciona, insere)
-- Adiciona novos clientes à fila de atendimento
-
+    - Adiciona novos clientes à fila de atendimento
 Remoção (remove, remove_ultimo)
-- Remove clientes atendidos da fila
-
+    - Remove clientes atendidos da fila
 Busca (procura, obtem)
-- Localiza clientes ou classes de atendimento
-
+    - Localiza clientes ou classes de atendimento
 Vantagens para este Projeto:
-- Simplicidade: Adequada para o tamanho esperado da fila
-- Suficiência: Atende aos requisitos de prioridade baseada em:
-    - Ordem de chegada
-    - Tempo máximo de espera
-- Volume: O volume de dados (pequeno), permite estrutura de dados menos sofisticadas
+    - Simplicidade: Adequada para o tamanho esperado da fila
+    - Suficiência: Atende aos requisitos de prioridade baseada em:
+        - Ordem de chegada
+        - Tempo máximo de espera
+    - Volume: O volume de dados (pequeno), permite estrutura de dados menos sofisticadas
 
 <details>
     <summary>Diagrama</summary>
