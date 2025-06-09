@@ -1,4 +1,4 @@
-# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
+![image](https://github.com/user-attachments/assets/b7b2ef24-d59b-4a88-8e25-e3418f4b8ffc)![image](https://github.com/user-attachments/assets/6f0e1fcc-3c89-40b0-ba0e-9c4f46d08ab0)# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
 
 ## Introdução
 
@@ -78,6 +78,11 @@ EOF
 # Aplicar a política
 vault policy write api-reader api-policy.hcl
 ```
+<details>
+  <summary>Imagem Guia</summary>
+
+  ![image](https://github.com/user-attachments/assets/030a5db8-7560-4029-bcd1-af9fa0732686)
+</details>
 
 ### 5. Gerar um token com permissões limitadas
 
@@ -85,6 +90,13 @@ vault policy write api-reader api-policy.hcl
 # Criar token com a política api-reader
 vault token create -policy="api-reader" -ttl=24h
 ```
+<details>
+  <summary>Imagem Guia</summary>
+  
+  ![image](https://github.com/user-attachments/assets/591831b0-2370-4ad0-a0ec-b3a3efc5e7bd)
+  <br>
+  ![image](https://github.com/user-attachments/assets/8cd48a49-38b5-46fe-8579-56ed47311bec)
+</details>
 
 Anote o token gerado - este será usado pela aplicação.
 
@@ -94,7 +106,7 @@ Vamos utilizar o curl para simular um request de outra aplicação.
 
 ```bash
 # Fora do container, no host Linux:
-curl -s --header "X-Vault-Token: PLACEHOLDER" http://localhost:8200/v1/secret/data/api-keys/producao
+curl -s --header "X-Vault-Token: PLACEHOLDER" http://localhost:8200/v1/secret/data/api-keys/producao | jq
 ```
 
 ## Síntese dos Resultados
