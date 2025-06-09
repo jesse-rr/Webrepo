@@ -105,9 +105,14 @@ Anote o token gerado - este será usado pela aplicação.
 Vamos utilizar o curl para simular um request de outra aplicação.
 
 ```bash
-# Fora do container, no host Linux:
+# Fora do container, no host Linux: OBS, se nao tiver "JQ", retire o "| jq" e use algo como: https://jsonformatter.curiousconcept.com
 curl -s --header "X-Vault-Token: PLACEHOLDER" http://localhost:8200/v1/secret/data/api-keys/producao | jq
 ```
+<details>
+  <summary>Imagem Guia</summary>
+
+  ![image](https://github.com/user-attachments/assets/c942c189-83e8-4c3a-a667-9bcf0bbe8cfb)
+</details>
 
 ## Síntese dos Resultados
 
