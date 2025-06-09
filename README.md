@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/b7b2ef24-d59b-4a88-8e25-e3418f4b8ffc)![image](https://github.com/user-attachments/assets/6f0e1fcc-3c89-40b0-ba0e-9c4f46d08ab0)# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
+# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
 
 ## Introdução
 
