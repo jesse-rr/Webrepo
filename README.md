@@ -30,10 +30,10 @@ docker run --cap-add=IPC_LOCK -d --name=dev-vault -p 8200:8200 hashicorp/vault s
 O Vault estará disponível em http://localhost:8200. Você pode ver o token de root (para desenvolvimento) na saída do comando anterior ou com:
 
 ```bash
+# Copie o token que aparece após `Root Token:`.
 docker logs dev-vault | grep "Root Token:"
 ```
 
-Copie o token que aparece após `Root Token:`.
 <img style="text-align: center" src="https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377">
 
 
