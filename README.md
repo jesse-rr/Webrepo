@@ -32,6 +32,8 @@ O Vault estará disponível em http://localhost:8200. Você pode ver o token de 
 ```bash
 docker logs dev-vault | grep "Root Token:"
 ```
+![image](https://github.com/user-attachments/assets/4a0c74bf-2f65-45eb-afe5-7e45cbb08377)
+
 
 Copie o token que aparece após `Root Token:`.
 
