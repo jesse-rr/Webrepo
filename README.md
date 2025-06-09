@@ -18,6 +18,9 @@ Nesta demonstração, mostrarei como uma aplicação pode acessar com segurança
 Primeiro, vamos criar um contêiner Docker com o HashiCorp Vault:
 
 ```bash
+# [opcional] - Para uso fora de "sudo"
+dockerd-rootless-setuptool.sh install
+
 # Baixar a imagem oficial do Vault
 docker pull hashicorp/vault
 
