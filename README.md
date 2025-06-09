@@ -57,6 +57,11 @@ export VAULT_TOKEN='PLACEHOLDER'
 # Armazenar uma chave API secreta (ex: a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6")
 vault kv put secret/api-keys/producao key="a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"
 ```
+<details>
+  <summary>Imagem Guia</summary>
+  
+  ![image](https://github.com/user-attachments/assets/94c837a6-8b4a-42b8-b6eb-ebcb7b34d575)
+</details>
 
 ### 4. Criar uma política de acesso
 
