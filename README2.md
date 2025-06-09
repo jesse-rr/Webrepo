@@ -8,10 +8,13 @@ A ListaSequencial foi a estrutura unica e principal neste projeto devido às seg
 
 Inserção (adiciona, insere)
 - Adiciona novos clientes à fila de atendimento
+
 Remoção (remove, remove_ultimo)
 - Remove clientes atendidos da fila
+
 Busca (procura, obtem)
 - Localiza clientes ou classes de atendimento
+
 Vantagens para este Projeto:
 - Simplicidade: Adequada para o tamanho esperado da fila
 - Suficiência: Atende aos requisitos de prioridade baseada em:
