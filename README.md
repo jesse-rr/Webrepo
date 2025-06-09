@@ -1,4 +1,4 @@
-# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
+![image](https://github.com/user-attachments/assets/939c4209-08d4-438c-bacf-cc3e9aee52d2)# Demonstração Prática: Acessando Segredos Armazenados em um Password Vault
 
 ## Introdução
 
@@ -113,6 +113,18 @@ curl -s --header "X-Vault-Token: PLACEHOLDER" http://localhost:8200/v1/secret/da
 
   ![image](https://github.com/user-attachments/assets/c942c189-83e8-4c3a-a667-9bcf0bbe8cfb)
 </details>
+
+### Extra
+Utilizar a UI para demonstrar de melhor forma. Alterando os metadados obtidos & resultado. Com Rastreamento, gerenciamento centralizado e controle.
+<details>
+  <summary>Imagem Guia</summary>
+  Secret Engines -> Secret -> api-keys -> producao -> metadata -> edit
+  
+  ![image](https://github.com/user-attachments/assets/1b4a6626-e66f-426e-bcfd-a47f684e9b7d)
+
+  ![image](https://github.com/user-attachments/assets/e6006e6e-ca35-45c5-883c-c9a37a50695e)
+</details>
+
 
 ## Síntese dos Resultados
 
