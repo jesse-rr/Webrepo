@@ -1,4 +1,4 @@
-#Manual de Utilizacaoção - Fila do Pão 
+# Manual de Utilizacaoção - Fila do Pão 
 _OBS: O sistema foi desenvolvido em Java, utilizando estruturas de dados customizadas (sem usar APIs prontas do Java) e um arquivo de configuração em CSV para definir as classes de atendimento._
 
 ### Funcionalidades Implementadas
