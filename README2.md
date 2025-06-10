@@ -3,13 +3,12 @@
 ### Introdução
 Este manual descreve a implementação de um sistema de atendimento de clientes que prioriza atendimentos de acordo com a classe de atendimento e o tempo de espera de cada cliente. O sistema foi desenvolvido utilizando estruturas de dados lineares implementadas manualmente, sem uso das APIs Java.
 Funcionalidades Principais
-
-    1. Listar classes de atendimento: Exibe todas as classes configuradas no sistema
-    2. Adicionar cliente à fila: Gera uma senha para o cliente baseada em sua classe
-    3. Obter próxima senha: Retorna a próxima senha a ser atendida conforme as regras de prioridade
+1. Listar classes de atendimento: Exibe todas as classes configuradas no sistema
+2. Adicionar cliente à fila: Gera uma senha para o cliente baseada em sua classe
+3. Obter próxima senha: Retorna a próxima senha a ser atendida conforme as regras de prioridade
 
 ### Implementação das Operações
-###### Listar Classes de Atendimento (processarArquivo(InputStream config))
+##### Listar Classes de Atendimento (processarArquivo(InputStream config))
 Implementação:
 1. As classes são carregadas do arquivo classes.csv durante a inicialização do sistema (no construtor da classe App)
 2. O arquivo é processado pelo GerenciadorAtendimento que armazena as classes em uma ListaSequencial
@@ -21,7 +20,7 @@ Fluxo:
 3. Um objeto ClasseAtendimento é criado para cada linha válida
 4. Todos os objetos são armazenados na lista 
 
-###### Adicionar Cliente à Fila (adiciona_cliente(String classe))
+##### Adicionar Cliente à Fila (adiciona_cliente(String classe))
 Implementação:
 1. O método adiciona_cliente(String classe) recebe o código da classe desejada
 2. Verifica se a classe existe no sistema
@@ -37,7 +36,7 @@ Fluxo:
 4. Incremento do contador específico da classe
 5. Criação do cliente e adição à fila
 
-###### Obter Próxima Senha (proxima_senha())
+#### Obter Próxima Senha (proxima_senha())
 Implementação:
 1. Verifica primeiro se há clientes que excederam seu tempo máximo de espera
     1.1 _Se múltiplos clientes excederam, seleciona o de maior prioridade_
@@ -65,7 +64,7 @@ __Array de contadores (int[])__: Com finalidade de manter contagem de clientes p
 
 ### Diagrama
 <details>
-    <summary>Diagrama</summary>
+    <summary>CLIQUE AQUI</summary>
     
 ```mermaid
 classDiagram
