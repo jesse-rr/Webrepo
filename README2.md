@@ -2,11 +2,6 @@
 
 ### Introdução
 Este manual descreve a implementação de um sistema de atendimento de clientes que prioriza atendimentos de acordo com a classe de atendimento e o tempo de espera de cada cliente. O sistema foi desenvolvido utilizando estruturas de dados lineares implementadas manualmente, sem uso das APIs Java.
-Funcionalidades Principais
-
-    1. Listar classes de atendimento: Exibe todas as classes configuradas no sistema
-    2. Adicionar cliente à fila: Gera uma senha para o cliente baseada em sua classe
-    3. Obter próxima senha: Retorna a próxima senha a ser atendida conforme as regras de prioridade
 
 ### Implementação das Operações
 
@@ -44,7 +39,7 @@ Fluxo:
     4. Incremento do contador específico da classe
     5. Criação do cliente e adição à fila
 
-### Obter Próxima Senha (proxima_senha())
+#### Obter Próxima Senha (proxima_senha())
 
 Implementação:
 
@@ -62,7 +57,7 @@ Fluxo:
     5. Remoção do cliente da fila e retorno da senha
 
 ### Estruturas de Dados Utilizadas
-__ListaSequencial<T>__: Com finalidade de armazenar as classes de atendimento e os clientes em espera, escolhido por ser uma estrutura simples e eficiente para operações de adição, remoção e acesso por índice, e pelo fato de que a "regra de atendimento" ser simples, não necessitando de alguma estrutura complexa.
+#### __ListaSequencial<T>__: Com finalidade de armazenar as classes de atendimento e os clientes em espera, escolhido por ser uma estrutura simples e eficiente para operações de adição, remoção e acesso por índice, e pelo fato de que a "regra de atendimento" ser simples, não necessitando de alguma estrutura complexa.
 
 - Operações utilizadas:
     - adiciona(): Para incluir novos elementos
@@ -71,7 +66,7 @@ __ListaSequencial<T>__: Com finalidade de armazenar as classes de atendimento e 
     - comprimento(): Para verificar tamanho da lista
     - esta_vazia(): Para verificar se há clientes
 
-__Array de contadores (int[])__: Com finalidade de manter contagem de clientes por classe para geração de senha.
+#### __Array de contadores (int[])__: Com finalidade de manter contagem de clientes por classe para geração de senha.
 
 ### Diagrama
 <details>
