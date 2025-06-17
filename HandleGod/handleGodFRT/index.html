@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Endpoint Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="logo">
+        <i class="fas fa-server"></i>
+        <span>API Manager</span>
+      </div>
+      <nav>
+        <ul>
+          <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+          <li><a href="#"><i class="fas fa-plug"></i> Endpoints</a></li>
+          <li><a href="#"><i class="fas fa-tachometer-alt"></i> Rate Limits</a></li>
+          <li><a href="#"><i class="fas fa-shield-alt"></i> Security</a></li>
+          <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+          <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <h1>Endpoint Management</h1>
+        <div class="user-info">
+          <span>Admin User</span>
+          <div class="avatar">AU</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="stats-cards">
+          <div class="card">
+            <div class="card-header">
+              <h3>Total Endpoints</h3>
+              <i class="fas fa-plug"></i>
+            </div>
+            <div class="card-body">
+              <span class="stat">24</span>
+              <span class="change up">+2 this week</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Rate Limited</h3>
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="card-body">
+              <span class="stat">8</span>
+              <span class="change down">-1 this week</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Blocked Endpoints</h3>
+              <i class="fas fa-ban"></i>
+            </div>
+            <div class="card-body">
+              <span class="stat">3</span>
+              <span class="change neutral">No change</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="main-section">
+          <div class="endpoint-control">
+            <h2>Endpoint Configuration</h2>
+            <form class="endpoint-form">
+              <div class="form-group">
+                <label for="endpoint-path">Endpoint Path</label>
+                <input type="text" id="endpoint-path" placeholder="/api/v1/resource">
+              </div>
+
+              <div class="form-group">
+                <label for="http-method">HTTP Method</label>
+                <select id="http-method">
+                  <option value="GET">GET</option>
+                  <option value="POST">POST</option>
+                  <option value="PUT">PUT</option>
+                  <option value="DELETE">DELETE</option>
+                  <option value="PATCH">PATCH</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="rate-limit">Rate Limit</label>
+                <div class="input-with-unit">
+                  <input type="number" id="rate-limit" value="100">
+                  <span>requests/minute</span>
+                </div>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="enable-limit" checked>
+                <label for="enable-limit">Enable Rate Limiting</label>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="log-requests">
+                <label for="log-requests">Log All Requests</label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Configuration</button>
+                <button type="button" class="btn btn-secondary">Test Endpoint</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="endpoint-list">
+            <h2>Active Endpoints</h2>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Path</th>
+                    <th>Method</th>
+                    <th>Rate Limit</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>/api/v1/users</td>
+                    <td>GET</td>
+                    <td>100/min</td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-copy"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>/api/v1/users</td>
+                    <td>POST</td>
+                    <td>50/min</td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-copy"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>/api/v1/products</td>
+                    <td>GET</td>
+                    <td>200/min</td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-copy"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>/api/v1/orders</td>
+                    <td>POST</td>
+                    <td>30/min</td>
+                    <td><span class="status limited">Limited</span></td>
+                    <td>
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-copy"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>/api/v1/admin</td>
+                    <td>GET</td>
+                    <td>10/min</td>
+                    <td><span class="status blocked">Blocked</span></td>
+                    <td>
+                      <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                      <button class="btn-icon"><i class="fas fa-copy"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endpoint Manager</title>
+    <!-- Fixed CSS path - remove ../ and ensure file is in static/ -->
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">Endpoint Manager</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Endpoints</a></li>
+                <li><a href="#">Config</a></li>
+            </ul>
+        </nav>
+    </header>
+    <aside>
+        <div class="filters">
+            <h3>Filters</h3>
+            <div class="filter-group">
+                <label for="search">Search</label>
+                <input type="text" id="search" placeholder="Filter endpoints...">
+            </div>
+            <div class="filter-group">
+                <label for="method">HTTP Method</label>
+                <select id="method">
+                    <option value="">All Methods</option>
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="controller">Controller</label>
+                <select id="controller">
+                    <option value="">All Controllers</option>
+                    <option th:each="controller : ${controllers}"
+                            th:text="${controller}"
+                            th:value="${controller}"></option>
+                </select>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                Apply Filters
+            </button>
+        </div>
+    </aside>
+    <main>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Total Endpoints</h3>
+                <p th:text="${stats.totalEndpoints}">42</p>
+            </div>
+            <div class="stat-card">
+                <h3>GET Requests</h3>
+                <p th:text="${stats.getEndpoints}">24</p>
+            </div>
+            <div class="stat-card">
+                <h3>POST Requests</h3>
+                <p th:text="${stats.postEndpoints}">12</p>
+            </div>
+            <div class="stat-card">
+                <h3>Protected</h3>
+                <p th:text="${stats.securedEndpoints}">18</p>
+            </div>
+        </div>
+        <div class="endpoints-list">
+            <div class="endpoint" th:each="endpoint : ${endpoints}">
+                <div class="endpoint-header">
+                        <span class="endpoint-method"
+                              th:classappend="${endpoint.method == 'GET'} ? 'get' :
+                                            ${endpoint.method == 'POST'} ? 'post' :
+                                            ${endpoint.method == 'PUT'} ? 'put' : 'delete'"
+                              th:text="${endpoint.method}"></span>
+                    <span class="endpoint-path" th:text="${endpoint.path}"></span>
+                </div>
+                <div class="endpoint-controller" th:text="${endpoint.controller}"></div>
+                <div class="endpoint-actions">
+                    <button class="btn btn-outline">Edit</button>
+                    <button class="btn btn-outline">Permissions</button>
+                    <button class="btn btn-outline">Delete</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

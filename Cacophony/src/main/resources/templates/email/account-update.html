@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .changes { margin: 15px 0; }
+        .changes li { margin-bottom: 5px; }
+        .button { background-color: #3498db; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; }
+        .footer { margin-top: 20px; font-size: 12px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Your Account Has Been Updated</h1>
+</div>
+<p>Hello {{username}},</p>
+<p>We're letting you know that the following changes were made to your account:</p>
+
+<ul class="changes">
+    {{#each changes}}
+    <li><strong>{{this.field}}:</strong> {{this.value}}</li>
+    {{/each}}
+</ul>
+
+<p>If you didn't make these changes, please secure your account immediately.</p>
+<p><a href="{{accountSettingsLink}}" class="button">Review Account</a></p>
+<div class="footer">
+    <p>Best regards,<br>The Cacophony Team</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { color: #9b59b6; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .invite-details { background-color: #f5f0fa; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .button { background-color: #9b59b6; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; display: inline-block; }
+        .footer { margin-top: 20px; font-size: 12px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>You've Been Invited!</h1>
+</div>
+<p>Hello,</p>
+<p>{{inviter}} has invited you to join the server "{{serverName}}".</p>
+
+<div class="invite-details">
+    <p><strong>Server Description:</strong> {{serverDescription}}</p>
+    <p><strong>Members:</strong> {{memberCount}}</p>
+</div>
+
+<p><a href="{{inviteLink}}" class="button">Accept Invitation</a></p>
+<div class="footer">
+    <p>Best regards,<br>The Cacophony Team</p>
+</div>
+</body>
+</html>
