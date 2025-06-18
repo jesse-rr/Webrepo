@@ -1,0 +1,107 @@
+.aside {
+    display: grid;
+    grid-template-columns: 80px auto;
+    width: 400px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+
+    &-links {
+        display: flex;
+        background: rgb(20, 20, 61);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 20px;
+
+        ul {
+            text-align: center;
+            list-style: none;
+            color: white;
+            font-size: 2em;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        li {
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            position: relative;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            &.logo {
+                margin-bottom: 30px;
+                padding: 15px 0;
+
+                i {
+                    color: #4dabf7;
+                }
+            }
+        }
+
+        a {
+            color: #adb5bd;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+
+            &:hover {
+                color: white;
+            }
+
+            &.active {
+                color: white;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 30px;
+                    width: 4px;
+                    background: #4dabf7;
+                    border-radius: 0 2px 2px 0;
+                }
+            }
+
+            &::before {
+                content: attr(title);
+                position: absolute;
+                left: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #333;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 14px;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.2s;
+                white-space: nowrap;
+                z-index: 100;
+                margin-left: 15px;
+            }
+
+            &:hover::before {
+                opacity: 1;
+                visibility: visible;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    &-content {
+        background: rgb(69, 69, 100);
+        color: white;
+        padding: 20px;
+        overflow-y: auto;
+    }
+}
