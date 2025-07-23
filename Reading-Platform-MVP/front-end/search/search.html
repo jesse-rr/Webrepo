@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Books</title>
+  <link rel="stylesheet" href="./css/search.css">
+  <link rel="stylesheet" href="/homepage/css/styles.css">
+  <script src="./js/search.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="div_logo">
+      <img class="img_logo" src="/homepage/stock/icons8-book-shelf-100.png" alt="">
+      <p class="p_logo">Platform</p>
+    </div>
+    <nav class="nav">
+      <a href="/homepage/index.html" class="nav_link">Homepage</a>
+      <a href="/ranking/ranking-v2.html" class="nav_link">Ranking</a>
+      <a href="/homepage/index.html" class="nav_link">Recommendations</a>
+      <a href="/search/search.html" class="nav_link">Search</a>
+      <a href="#" class="nav_link">Random</a>
+      <a href="#footer" class="nav_link">Contact</a>
+      <a href="/log_register/log-in.html" class="nav_link">Log in</a>
+    </nav>
+  </header>
+  <main class="main-container">
+    <section class="form-section">
+      <form class="search-form" action="/search" method="get">
+        <fieldset class="fieldset">
+            <legend class="legend">Basic Search</legend>
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" class="form-input">
+            <label for="authorName" class="form-label">Author Name:</label>
+            <input type="text" id="authorName" name="authorName" class="form-input">
+            <label for="rating" class="form-label">Rating:</label>
+            <div class="slider-container">
+                <div class="double-slider">
+                    <input type="range" id="ratingMin" name="ratingMin" min="0" max="5" step="0.1" value="0" class="range-input">
+                    <input type="range" id="ratingMax" name="ratingMax" min="0" max="5" step="0.1" value="5" class="range-input">
+                    <div class="slider-values">
+                        <span id="ratingMinValue" class="slider-value">0</span><span id="ratingMaxValue" class="slider-value">5</span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset">
+            <legend class="legend">Book Status</legend>
+            <label for="bookStatus" class="form-label">Book Status:</label>
+            <select id="bookStatus" name="bookStatus" class="form-select">
+                <option value="ALL">All</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="HAITUS">Hiatus</option>
+                <option value="ON_GOING">On Going</option>
+                <option value="AXED">Axed</option>
+            </select>
+        </fieldset>
+        <fieldset class="fieldset fieldset_genre">
+          <legend class="legend">Genres</legend>
+          <label for="genres" class="form-label">Select Genres:</label>
+          <div class="form-check">
+              <input type="checkbox" id="action" name="genres[]" value="Action" class="form-check-input">
+              <label for="action" class="form-check-label">Action</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="adventure" name="genres[]" value="Adventure" class="form-check-input">
+            <label for="adventure" class="form-check-label">Adventure</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="fantasy" name="genres[]" value="Fantasy" class="form-check-input">
+              <label for="fantasy" class="form-check-label">Fantasy</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="romance" name="genres[]" value="Romance" class="form-check-input">
+              <label for="romance" class="form-check-label">Romance</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="sci-fi" name="genres[]" value="Sci_Fi" class="form-check-input">
+              <label for="sci-fi" class="form-check-label">Sci-Fi</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="horror" name="genres[]" value="Horror" class="form-check-input">
+              <label for="horror" class="form-check-label">Horror</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="mystery" name="genres[]" value="Mystery" class="form-check-input">
+              <label for="mystery" class="form-check-label">Mystery</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="thriller" name="genres[]" value="Thriller" class="form-check-input">
+              <label for="thriller" class="form-check-label">Thriller</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="historical" name="genres[]" value="Historical" class="form-check-input">
+              <label for="historical" class="form-check-label">Historical</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="drama" name="genres[]" value="Drama" class="form-check-input">
+              <label for="drama" class="form-check-label">Drama</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="comedy" name="genres[]" value="Comedy" class="form-check-input">
+              <label for="comedy" class="form-check-label">Comedy</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="slice-of-life" name="genres[]" value="Slice_of_Life" class="form-check-input">
+              <label for="slice-of-life" class="form-check-label">Slice of Life</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="supernatural" name="genres[]" value="Supernatural" class="form-check-input">
+              <label for="supernatural" class="form-check-label">Supernatural</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="martial-arts" name="genres[]" value="Martial_Arts" class="form-check-input">
+              <label for="martial-arts" class="form-check-label">Martial Arts</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="harem" name="genres[]" value="Harem" class="form-check-input">
+              <label for="harem" class="form-check-label">Harem</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="dystopian" name="genres[]" value="Dystopian" class="form-check-input">
+              <label for="dystopian" class="form-check-label">Dystopian</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="isekai" name="genres[]" value="Isekai" class="form-check-input">
+              <label for="isekai" class="form-check-label">Isekai</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="litRPG" name="genres[]" value="LitRPG" class="form-check-input">
+              <label for="litRPG" class="form-check-label">LitRPG</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="psychological" name="genres[]" value="Psychological" class="form-check-input">
+              <label for="psychological" class="form-check-label">Psychological</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="suspense" name="genres[]" value="Suspense" class="form-check-input">
+              <label for="suspense" class="form-check-label">Suspense</label>
+          </div>
+          <div class="form-check">
+              <input type="checkbox" id="apocalypse" name="genres[]" value="Apocalypse" class="form-check-input">
+              <label for="apocalypse" class="form-check-label">Apocalypse</label>
+          </div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend class="legend">Metadata</legend>
+            <div class="metadata_div">
+              <label for="isFeatured" class="form-label">Featured:</label><input type="checkbox" id="isFeatured" name="isFeatured" class="form-checkbox">
+              <label for="wasRead" class="form-label">Was Read:</label><input type="checkbox" id="wasRead" name="wasRead" class="form-checkbox">
+            </div>
+
+            <label for="chapterQuantity" class="form-label">Chapter Quantity:</label>
+            <div class="slider-container">
+              <div class="double-slider">
+                    <input type="range" id="chapterQuantityMin" name="chapterQuantityMin" min="0" max="1000" step="10" value="0" class="range-input">
+                    <input type="range" id="chapterQuantityMax" name="chapterQuantityMax" min="0" max="1000" step="10" value="1000" class="range-input">
+                    <div class="slider-values">
+                      <span id="chapterQuantityMinValue" class="slider-value">0</span><span id="chapterQuantityMaxValue" class="slider-value">1000+</span>
+                    </div>
+                  </div>
+                </div>
+                <label for="viewsQuantity" class="form-label">Views Quantity:</label>
+                <div class="slider-container">
+                  <div class="double-slider">
+                    <input type="range" id="viewsQuantityMin" name="viewsQuantityMin" min="0" max="5000000" step="10000" value="0" class="range-input">
+                    <input type="range" id="viewsQuantityMax" name="viewsQuantityMax" min="0" max="5000000" step="10000" value="5000000" class="range-input">
+                    <div class="slider-values">
+                      <span id="viewsQuantityMinValue" class="slider-value">0</span><span id="viewsQuantityMaxValue" class="slider-value">5M+</span>
+                    </div>
+                </div>
+              </div>
+              <label for="bookmarksQuantity" class="form-label">Bookmarks Quantity:</label>
+              <div class="slider-container">
+                <div class="double-slider">
+                  <input type="range" id="bookmarksQuantityMin" name="bookmarksQuantityMin" min="0" max="10000" step="100" value="0" class="range-input">
+                  <input type="range" id="bookmarksQuantityMax" name="bookmarksQuantityMax" min="0" max="10000" step="100" value="10000" class="range-input">
+                  <div class="slider-values">
+                    <span id="bookmarksQuantityMinValue" class="slider-value">0</span><span id="bookmarksQuantityMaxValue" class="slider-value">10K+</span>
+                  </div>
+                </div>
+              </div>
+            <label for="reviewQuantity" class="form-label">Review Quantity:</label>
+            <div class="slider-container">
+              <div class="double-slider">
+                    <input type="range" id="reviewQuantityMin" name="reviewQuantityMin" min="0" max="10000" step="100" value="0" class="range-input">
+                    <input type="range" id="reviewQuantityMax" name="reviewQuantityMax" min="0" max="10000" step="100" value="10000" class="range-input">
+                    <div class="slider-values">
+                        <span id="reviewQuantityMinValue" class="slider-value">0</span><span id="reviewQuantityMaxValue" class="slider-value">10K+</span>
+                      </div>
+                </div>
+              </div>
+            </fieldset>
+        <button type="submit" class="submit-btn">Search</button>
+    </form>
+  </section>
+</main>
+
+<footer class="footer" id="footer">
+  <div class="div_footer">
+    <div class="aboutUs">
+        <p><strong>ABOUT</strong></p>
+        Platform, as the name suggests, is a platform for reading, one of my hobbies as a developer. I created it as a side project. Throughout its development, I learned many things—from front-end and back-end development to web scraping for lightnovels/novels. I plan to keep it online for as long as I can, as it has been a valuable learning experience for me
+      </div>
+      <div class="div_footer_inside">
+        <div>
+          <p><strong>CONTACT</strong></p>
+          <a href="mailto:jessericardorogerio@gmail.com">jessericardorogerio@gmail.com</a>
+        </div>
+        <div>
+          <p><strong>USER SUGGESTIONS</strong></p>
+          <a href="#TODO">click here to send a suggestion</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer_copyright">
+      &copy; All rights reserved to <strong>Platform&trade;</strong>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in</title>
+  <link rel="stylesheet" href="./css/log-in.css">
+  <link rel="stylesheet" href="/homepage/css/styles.css">
+  <script src="./js/log-in.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="div_logo">
+      <img class="img_logo" src="/homepage/stock/icons8-book-shelf-100.png" alt="">
+      <p class="p_logo">Platform</p>
+    </div>
+    <nav class="nav">
+      <a href="/homepage/index.html" class="nav_link">Homepage</a>
+      <a href="/ranking/ranking-v2.html" class="nav_link">Ranking</a>
+      <a href="/homepage/index.html" class="nav_link">Recommendations</a>
+      <a href="/search/search.html" class="nav_link">Search</a>
+      <a href="#" class="nav_link">Random</a>
+      <a href="#footer" class="nav_link">Contact</a>
+      <a href="/log_register/log-in.html" class="nav_link">Log in</a>
+    </nav>
+  </header>
+  <main class="main">
+    <div class="div_log-in">
+      <p class="log-in_title" id="title"><strong>LOGIN</strong></p>
+      <form method="GET" action="#" class="log-in_form">
+        <label id="label_login" for="login">Login/Email</label>
+        <input type="text" name="login" id="login" req>
+        <label class="hdn_form" for="email">Email</label>
+        <input class="hdn_form" type="email" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <label class="hdn_form" for="matching_passwd">Matching password</label>
+        <input class="hdn_form" type="password" name="matching_passwd" id="matching_passwd">
+        <div class="log-in_btn">
+          <button type="submit" id="signin_btn">Sign in</button>
+          <button type="submit" id="register_btn">register</button>
+        </div>
+      </form>
+      <div class="log-in_oauth2">
+        <button type="button" class="google_btn">
+          <img src="/homepage/stock/google.png" alt="google icon" class="google_img">
+          Login with Google Services
+        </button>
+      </div>
+      <a class="log-in_account" href="#">forgot password?</a>
+    </div>
+  </main>
+  <footer class="footer" id="footer">
+    <div class="div_footer">
+      <div class="aboutUs">
+        <p><strong>ABOUT</strong></p>
+        Platform, as the name suggests, is a platform for reading, one of my hobbies as a developer. I created it as a side project. Throughout its development, I learned many things—from front-end and back-end development to web scraping for lightnovels/novels. I plan to keep it online for as long as I can, as it has been a valuable learning experience for me
+      </div>
+      <div class="div_footer_inside">
+        <div>
+          <p><strong>CONTACT</strong></p>
+          <a href="mailto:jessericardorogerio@gmail.com">jessericardorogerio@gmail.com</a>
+        </div>
+        <div>
+          <p><strong>USER SUGGESTIONS</strong></p>
+          <a href="#TODO">click here to send a suggestion</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer_copyright">
+      &copy; All rights reserved to <strong>Platform&trade;</strong>
+    </p>
+  </footer>
+</body>
+</html>

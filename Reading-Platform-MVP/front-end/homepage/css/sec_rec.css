@@ -1,0 +1,20 @@
+.sec_rec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+}
+.sec_rec div {
+  margin: 20px 0;
+}
+.sec_rec_inside {
+  display: flex;
+  gap: 10px;
+}
+.sec_rec_inside div{
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  height: 500px;
+  width: 50%;
+}

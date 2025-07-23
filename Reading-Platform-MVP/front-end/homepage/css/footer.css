@@ -1,0 +1,27 @@
+.footer {
+  padding: 10px;
+}
+strong{
+  color: var(--color-5);
+}
+.div_footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 5px;
+  gap: 30px;
+}
+.div_footer_inside div{
+  padding: 0 0 20px 0;
+}
+.footer_copyright {
+  font-weight: lighter;
+  opacity: .6;
+}
+.aboutUs {
+  width: 450px;
+  max-height: 200px;
+  overflow: scroll;
+}
+.aboutUs::-webkit-scrollbar {
+  display: none;
+}

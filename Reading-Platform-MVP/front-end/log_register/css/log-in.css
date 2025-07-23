@@ -1,0 +1,104 @@
+.main {
+  justify-content: center;
+  background-image: url('/homepage/stock/cartographer.png');
+  border: 0px solid var(--color-2);
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+}
+
+.log-in_form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  font-size: 1.3em;
+}
+.log-in_form input {
+  border: 0px solid white;
+  border-bottom-width: 1px;
+  background-color: transparent;
+  padding: 5px;
+  font-size: 1em;
+  margin: 0 0 25px 0;
+  font-weight: lighter;
+}
+.log-in_form label {
+  font-size: 1.2em;
+}
+.log-in_btn {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+.log-in_form button {
+  background-color: var(--color-4);
+  width: 100%;
+  padding: 10px;
+  border: 0px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  background-image: url('/homepage/stock/cartographer.png');
+  cursor: pointer;
+  transition: all ease-in-out .2s;
+}
+.log-in_form button:hover {
+  background-color: var(--color-2);
+  color: var(--color-1);
+}
+.log-in_title {
+  font-size: 3em;
+  text-shadow: 0 0 3px var(--color-4);
+  margin: 5px 0 40px 0;
+}
+.log-in_account {
+  text-align: center;
+  transition: all ease-in-out .2s;
+  font-weight: lighter;
+  text-decoration: none;
+  font-size: 1.1em;
+  margin: 20px 0;
+}
+.log-in_account:hover {
+  color: var(--color-5);
+}
+.div_log-in {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  height: 800px;
+  background-color: var(--color-3);
+  border-radius: 4px;
+  box-shadow: 0 0 10px black;
+  margin: 50px;
+}
+
+.google_img {
+  height: 40px;
+}
+.google_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-4);
+  box-shadow: 0 0 3px var(--color-2);
+  border: 0;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 1.6em;
+  cursor: pointer;
+  transition: all ease-in-out .2s;
+}
+.google_btn * {
+  margin: 0 20px 0 0;
+}
+.google_btn:hover {
+  background-color: var(--color-2);
+  background-image: url('/homepage/stock/cartographer.png');
+  color: var(--color-1);
+}
+.hdn_form {
+  display: none;
+}

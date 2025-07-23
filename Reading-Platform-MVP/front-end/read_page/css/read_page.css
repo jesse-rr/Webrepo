@@ -1,0 +1,42 @@
+.sec_reading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-3);
+  box-shadow: 0 0 3px 1px var(--color-3);
+  margin: 10px 10%;
+}
+.div_reading_top button, .div_reading_bottom button{
+  background-color: transparent;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: var(--color-4);
+  box-shadow: 0 0 3px var(--color-2);
+  padding: 5px 10px;
+  margin: 24px;
+  transition: all ease-in-out .2s;
+}
+.div_reading_top button:hover, .div_reading_bottom button:hover {
+  background-color: var(--color-2);
+  background-image: url('/homepage/stock/cartographer.png');
+  color: var(--color-1);
+}
+.div_reading_bottom, .div_reading_top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.div_reading_bottom .chapters_btn, .div_reading_top .chapters_btn {
+  background-color: transparent;
+  box-shadow: 0 0 0;
+}
+.div_reading_content {
+  width: 90%;
+}
+.div_reading_content p {
+  text-align: left;
+}

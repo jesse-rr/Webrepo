@@ -1,0 +1,14 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+#  elasticsearch: TODO, i just run it locally with bin/elasticsearch
+
+
+volumes:
+  redis_data:

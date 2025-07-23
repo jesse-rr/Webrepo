@@ -1,0 +1,14 @@
+.rec_container_inside {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  height: 300px;
+  background-color: var(--color-4);
+  box-shadow: 0 0 1px 1px var(--color-2);
+  gap: 15px;
+  padding: 3px 5px;
+  overflow-x: scroll;
+}
+.rec_container_inside img {
+  box-shadow: 0 0 1px 1px var(--color-2);
+}

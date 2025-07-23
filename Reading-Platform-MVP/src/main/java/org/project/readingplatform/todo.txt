@@ -1,0 +1,11 @@
+[PREMIUM]
+-   No ads (other html, with ads disable or just not in layout)
+-   Better customization (Layout/Profile/settings)
+-   Custom notifications/notes
+
+[BEST FROM THE WEEK]
+-   Views 70% // TODO AS A COOKIE?
+-   Bookmarks 10% 
+-   Time reading 10%
+-   Likes / Dislikes 5%
+-   Rating 5%

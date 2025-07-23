@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('header.css');
+@import url('feature.css');
+@import url('sec_rec.css');
+@import url('footer.css');
+@import url('options.css');
+@import url('rec_container.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", serif;
+  color: var(--color-2);
+
+  --color-1: #000000;
+  --color-2: #EEEEEE;
+  --color-3: #010914;
+  --color-3-1: #061121;
+  --color-4: #243642;
+  --color-5: #83badd;
+}
+
+body {
+  display: grid;
+}
+.header {
+  height: 100%;
+  background-color: var(--color-1);
+  padding: 10px 0;
+}
+.main {
+  background-color: var(--color-3);
+  background-image: url('/homepage/stock/cartographer.png');
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+}
+.footer {
+  background-color: var(--color-1);
+}

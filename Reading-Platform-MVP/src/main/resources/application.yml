@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: reading-platform
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: jrr
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/reading
+
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    default-encoding: UTF-8
+    protocol: smtp
+    username: # your company/personal-email
+    password: # generate an app password in your Google account. You'll need to have 2-Step Verification enabled for your Google account.
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+    elasticsearch:
+      repositories:
+        enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: # PLACEHOLDER
+            client-secret: # PLACEHOLDER
+            scope:
+              - email
+              - profile
+
+jwt:
+  secret-key: # Use a site like:
+  expiration-time: 3600000
+
+email:
+  verification-code:
+    expiration-time: 10
+
+server:
+  port: 8080
