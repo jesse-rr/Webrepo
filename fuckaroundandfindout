@@ -1,0 +1,42 @@
+fuck off file:
+public void ordena() {
+  APB<T> tree = new APB<T>();
+
+  for (int i = 0; i<this.len; i++) {
+    tree.adiciona(obtem(i));
+  }
+  tree.balanceia();
+
+  ListaSequencial<T> lista = tree.emOrdem();
+  Node atual = guarda;
+
+  for (int a = 0; a<len; a++) {
+    atual = atual.proximo;
+    atual.valor = lista.obtem(a);
+  }
+  guarda.antecessor = atual;
+
+}
+void copia(TabHash<K, V> outra) {
+    ListaSequencial<Par> items = outra.items();
+
+    for (Par par : items) {
+        this.adiciona(par.obtemChave(), par.obtemValor());
+    }
+}
+public ListaSequencial<T> liste_folhas() {
+    ListaSequencial<T> folhas = new ListaSequencial<>();
+    _listeFolhas(raiz, folhas);
+    return folhas;
+}
+
+private void _listeFolhas(NodoAPB nodo, ListaSequencial<T> folhas) {
+    if (nodo == null) return;
+
+    if (nodo.esq == null && nodo.dir == null) {
+        folhas.adiciona(nodo.valor);
+    } else {
+        _listeFolhas(nodo.esq, folhas);
+        _listeFolhas(nodo.dir, folhas);
+    }
+}
